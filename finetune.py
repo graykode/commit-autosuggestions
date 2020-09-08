@@ -212,9 +212,10 @@ class SummarizationModule(BaseTransformer):
     def get_dataset(self, type_path) -> Seq2SeqDataset:
         max_target_length = self.target_lens[type_path]
         data_config = DataConfig(
-            endpoint=args.matorage_dir,
+            endpoint=args.endpoint,
             access_key=os.environ['access_key'],
             secret_key=os.environ['secret_key'],
+            region=args.region,
             dataset_name='commit-autosuggestions',
             additional={
                 "mode": ("training" if type_path == "train" else "evaluation"),
@@ -265,10 +266,16 @@ class SummarizationModule(BaseTransformer):
             help="github url"
         )
         parser.add_argument(
-            "--matorage_dir",
+            "--endpoint",
             type=str,
             required=True,
-            help='matorage saved directory.'
+            help='matorage endpoint, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html'
+        )
+        parser.add_argument(
+            "--region",
+            type=str,
+            default=None,
+            help='matorage s3 region, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html'
         )
         parser.add_argument(
             "--max_source_length",
