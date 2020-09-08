@@ -323,13 +323,6 @@ def add_generic_args(parser, root_dir) -> None:
         help="Number of updates steps to accumulate before performing a backward/update pass.",
     )
     parser.add_argument("--seed", type=int, default=42, help="random seed for initialization")
-    parser.add_argument(
-        "--data_dir",
-        default=None,
-        type=str,
-        required=True,
-        help="The input data dir. Should contain the training files for the CoNLL-2003 NER task.",
-    )
 
 
 def generic_train(
