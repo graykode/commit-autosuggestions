@@ -8,6 +8,7 @@ scikit-learn
 seqeval
 psutil
 sacrebleu
+pyarrow>=0.16.0
 rouge-score
 tensorflow_datasets
 pytorch-lightning==0.8.5
