@@ -21,6 +21,8 @@ from transformers import (
     PretrainedConfig,
     PreTrainedTokenizer,
 )
+from modeling_bart import BartForConditionalGeneration
+
 from transformers.optimization import (
     Adafactor,
     get_cosine_schedule_with_warmup,
@@ -40,7 +42,7 @@ MODEL_MODES = {
     "pretraining": AutoModelForPreTraining,
     "token-classification": AutoModelForTokenClassification,
     "language-modeling": AutoModelWithLMHead,
-    "summarization": AutoModelForSeq2SeqLM,
+    "summarization": BartForConditionalGeneration,
     "translation": AutoModelForSeq2SeqLM,
 }
 

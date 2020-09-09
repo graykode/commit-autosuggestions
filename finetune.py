@@ -188,8 +188,8 @@ class SummarizationModule(BaseTransformer):
         t0 = time.time()
         generated_ids = self.model.generate(
             batch[0].long(),
+            patch_ids=batch[2].long(),
             attention_mask=batch[1].long(),
-            # patch_ids=batch[2].long(),
             use_cache=True,
             decoder_start_token_id=self.decoder_start_token_id,
         )
