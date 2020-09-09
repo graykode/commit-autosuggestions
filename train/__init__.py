@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .modeling_bart import BartForConditionalGeneration
+from train.modeling_bart import BartForConditionalGeneration
 
 __all__ = ["BartForConditionalGeneration"]

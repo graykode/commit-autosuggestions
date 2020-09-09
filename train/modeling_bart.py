@@ -41,7 +41,7 @@ from transformers.modeling_outputs import (
     Seq2SeqQuestionAnsweringModelOutput,
     Seq2SeqSequenceClassifierOutput,
 )
-from .modeling_utils import PreTrainedModel
+from modeling_utils import PreTrainedModel
 import logging
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
