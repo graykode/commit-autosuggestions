@@ -20,18 +20,25 @@ from transformers import AutoTokenizer
 from preprocess import diff_parse, truncate
 from train import BartForConditionalGeneration
 
+def get_length(chunks):
+    cnt = 0
+    for chunk in chunks:
+        cnt += len(chunk)
+    return cnt
 
-def suggester(chunks, max_source_length, model, tokenizer, device):
+def suggester(chunks, model, tokenizer, device):
+    max_source_length = get_length(chunks)
+
     input_ids, attention_masks, patch_ids = zip(*chunks)
-    input_ids = torch.LongTensor([truncate(input_ids, max_source_length, value=0)]).to(
-        device
-    )
+    input_ids = torch.LongTensor(
+        [truncate(input_ids, max_source_length, value=0)]
+    ).to(device)
     attention_masks = torch.LongTensor(
         [truncate(attention_masks, max_source_length, value=1)]
     ).to(device)
-    patch_ids = torch.LongTensor([truncate(patch_ids, max_source_length, value=0)]).to(
-        device
-    )
+    patch_ids = torch.LongTensor(
+        [truncate(patch_ids, max_source_length, value=0)]
+    ).to(device)
 
     summaries = model.generate(
         input_ids=input_ids, patch_ids=patch_ids, attention_mask=attention_masks
@@ -59,9 +66,13 @@ def main(args):
         staged_files = [f.strip() for f in staged_files]
         chunks = "\n".join(staged_files)
 
+    chunks = diff_parse(chunks, tokenizer)
+    if not chunks:
+        print('There is no file in staged state.')
+        return
+
     commit_message = suggester(
         chunks,
-        max_source_length=args.max_source_length,
         model=model,
         tokenizer=tokenizer,
         device=device,
@@ -88,13 +99,6 @@ if __name__ == "__main__":
         default="sshleifer/distilbart-xsum-6-6",
         type=str,
         help="Pretrained tokenizer name or path if not the same as model_name",
-    )
-    parser.add_argument(
-        "--max_source_length",
-        default=1024,
-        type=int,
-        help="The maximum total input sequence length after tokenization. Sequences longer "
-        "than this will be truncated, sequences shorter will be padded.",
     )
     args = parser.parse_args()
 
