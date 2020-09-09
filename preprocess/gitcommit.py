@@ -17,6 +17,7 @@ import re
 import enum
 import random
 import logging
+import tempfile
 import argparse
 import numpy as np
 from tqdm import *
@@ -62,10 +63,9 @@ def encode_line(tokenizer, line, patch):
         len(tokens) * [patch.value]
     )
 
-def sha_parse(sha, tokenizer, max_length=1024):
-
+def diff_parse(diff, tokenizer):
     chunks = []
-    for diff in whatthepatch.parse_patch(repo.git.show(sha)):
+    for diff in whatthepatch.parse_patch(diff):
         if diff.header.old_path != diff.header.new_path:
             chunks.append(encode_line(tokenizer, diff.header.old_path, PATCH.MINUS))
             chunks.append(encode_line(tokenizer, diff.header.new_path, PATCH.PLUS))
@@ -76,7 +76,11 @@ def sha_parse(sha, tokenizer, max_length=1024):
                 chunks.append(encode_line(tokenizer, change.line, PATCH.PLUS))
             elif change.old != None and change.new == None:
                 chunks.append(encode_line(tokenizer, change.line, PATCH.MINUS))
+    return chunks
 
+def sha_parse(sha, tokenizer, max_length=1024):
+
+    chunks = diff_parse(diff=repo.git.show(sha), tokenizer=tokenizer)
     if not chunks:
         return None
 
@@ -202,10 +206,16 @@ if __name__ == "__main__":
         help='matorage s3 region, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html'
     )
     parser.add_argument(
+        "--tokenizer_name",
+        default='sshleifer/distilbart-xsum-6-6',
+        type=str,
+        help="Pretrained tokenizer name or path if not the same as model_name",
+    )
+    parser.add_argument(
         "--matorage_batch",
         default=1024,
         type=int,
-        help='batch size to store data.'
+        help='The smallest batch size stored atomically in matorage.'
     )
     parser.add_argument(
         "--num_workers",
@@ -246,6 +256,6 @@ if __name__ == "__main__":
         if os.path.exists(args.local_path)
         else Repo.clone_from(args.url, to_path=args.local_path, branch="master")
     )
-    args.tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-xsum-12-6")
+    args.tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name)
 
     main(args)
