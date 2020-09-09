@@ -141,7 +141,11 @@ def invert_mask(attention_mask):
 
 
 def _prepare_bart_decoder_inputs(
-    config, input_ids, decoder_input_ids=None, decoder_padding_mask=None, causal_mask_dtype=torch.float32
+    config,
+    input_ids,
+    decoder_input_ids=None,
+    decoder_padding_mask=None,
+    causal_mask_dtype=torch.float32,
 ):
     """Prepare masks that ignore padding tokens in the decoder and a causal mask for the decoder if
     none are provided. This mimics the default behavior in fairseq. To override it pass in masks.
@@ -184,7 +188,9 @@ class PretrainedBartModel(PreTrainedModel):
     @property
     def dummy_inputs(self):
         pad_token = self.config.pad_token_id
-        input_ids = torch.tensor([[0, 6, 10, 4, 2], [0, 8, 12, 2, pad_token]], device=self.device)
+        input_ids = torch.tensor(
+            [[0, 6, 10, 4, 2], [0, 8, 12, 2, pad_token]], device=self.device
+        )
         dummy_inputs = {
             "attention_mask": input_ids.ne(pad_token),
             "input_ids": input_ids,
@@ -229,7 +235,11 @@ class EncoderLayer(nn.Module):
     def __init__(self, config: BartConfig):
         super().__init__()
         self.embed_dim = config.d_model
-        self.self_attn = Attention(self.embed_dim, config.encoder_attention_heads, dropout=config.attention_dropout)
+        self.self_attn = Attention(
+            self.embed_dim,
+            config.encoder_attention_heads,
+            dropout=config.attention_dropout,
+        )
         self.normalize_before = config.normalize_before
         self.self_attn_layer_norm = LayerNorm(self.embed_dim)
         self.dropout = config.dropout
@@ -255,7 +265,10 @@ class EncoderLayer(nn.Module):
         if self.normalize_before:
             x = self.self_attn_layer_norm(x)
         x, attn_weights = self.self_attn(
-            query=x, key=x, key_padding_mask=encoder_padding_mask, output_attentions=output_attentions
+            query=x,
+            key=x,
+            key_padding_mask=encoder_padding_mask,
+            output_attentions=output_attentions,
         )
         x = F.dropout(x, p=self.dropout, training=self.training)
         x = residual + x
@@ -308,13 +321,23 @@ class BartEncoder(nn.Module):
                 config.extra_pos_embeddings,
             )
         self.embed_patches = nn.Embedding(3, config.d_model, padding_idx=0)
-        self.layers = nn.ModuleList([EncoderLayer(config) for _ in range(config.encoder_layers)])
-        self.layernorm_embedding = LayerNorm(embed_dim) if config.normalize_embedding else nn.Identity()
+        self.layers = nn.ModuleList(
+            [EncoderLayer(config) for _ in range(config.encoder_layers)]
+        )
+        self.layernorm_embedding = (
+            LayerNorm(embed_dim) if config.normalize_embedding else nn.Identity()
+        )
         # mbart has one extra layer_norm
         self.layer_norm = LayerNorm(config.d_model) if config.normalize_before else None
 
     def forward(
-        self, input_ids, patch_ids, attention_mask=None, output_attentions=False, output_hidden_states=False, return_dict=False
+        self,
+        input_ids,
+        patch_ids,
+        attention_mask=None,
+        output_attentions=False,
+        output_hidden_states=False,
+        return_dict=False,
     ):
         """
         Args:
@@ -352,10 +375,14 @@ class BartEncoder(nn.Module):
                 encoder_states.append(x)
             # add LayerDrop (see https://arxiv.org/abs/1909.11556 for description)
             dropout_probability = random.uniform(0, 1)
-            if self.training and (dropout_probability < self.layerdrop):  # skip the layer
+            if self.training and (
+                dropout_probability < self.layerdrop
+            ):  # skip the layer
                 attn = None
             else:
-                x, attn = encoder_layer(x, attention_mask, output_attentions=output_attentions)
+                x, attn = encoder_layer(
+                    x, attention_mask, output_attentions=output_attentions
+                )
 
             if output_attentions:
                 all_attentions = all_attentions + (attn,)
@@ -365,14 +392,20 @@ class BartEncoder(nn.Module):
         if output_hidden_states:
             encoder_states.append(x)
             # T x B x C -> B x T x C
-            encoder_states = tuple(hidden_state.transpose(0, 1) for hidden_state in encoder_states)
+            encoder_states = tuple(
+                hidden_state.transpose(0, 1) for hidden_state in encoder_states
+            )
 
         # T x B x C -> B x T x C
         x = x.transpose(0, 1)
 
         if not return_dict:
-            return tuple(v for v in [x, encoder_states, all_attentions] if v is not None)
-        return BaseModelOutput(last_hidden_state=x, hidden_states=encoder_states, attentions=all_attentions)
+            return tuple(
+                v for v in [x, encoder_states, all_attentions] if v is not None
+            )
+        return BaseModelOutput(
+            last_hidden_state=x, hidden_states=encoder_states, attentions=all_attentions
+        )
 
 
 class DecoderLayer(nn.Module):
@@ -498,8 +531,12 @@ class BartDecoder(nn.Module):
         self.layers = nn.ModuleList(
             [DecoderLayer(config) for _ in range(config.decoder_layers)]
         )  # type: List[DecoderLayer]
-        self.layernorm_embedding = LayerNorm(config.d_model) if config.normalize_embedding else nn.Identity()
-        self.layer_norm = LayerNorm(config.d_model) if config.add_final_layer_norm else None
+        self.layernorm_embedding = (
+            LayerNorm(config.d_model) if config.normalize_embedding else nn.Identity()
+        )
+        self.layer_norm = (
+            LayerNorm(config.d_model) if config.add_final_layer_norm else None
+        )
 
     def forward(
         self,
@@ -595,23 +632,34 @@ class BartDecoder(nn.Module):
             if use_cache:
                 next_decoder_cache.append(layer_past.copy())
 
-            if self.layer_norm and (idx == len(self.layers) - 1):  # if config.add_final_layer_norm (mBART)
+            if self.layer_norm and (
+                idx == len(self.layers) - 1
+            ):  # if config.add_final_layer_norm (mBART)
                 x = self.layer_norm(x)
             if output_attentions:
                 all_self_attns += (layer_self_attn,)
 
         # Convert to standard output format: (seq_len, BS, model_dim) -> (BS, seq_len, model_dim)
         if output_hidden_states:
-            all_hidden_states = tuple(hidden_state.transpose(0, 1) for hidden_state in all_hidden_states)
+            all_hidden_states = tuple(
+                hidden_state.transpose(0, 1) for hidden_state in all_hidden_states
+            )
         x = x.transpose(0, 1)
         encoder_hidden_states = encoder_hidden_states.transpose(0, 1)
 
         next_cache = next_decoder_cache if use_cache else None
 
         if not return_dict:
-            return tuple(v for v in [x, next_cache, all_hidden_states, all_self_attns] if v is not None)
+            return tuple(
+                v
+                for v in [x, next_cache, all_hidden_states, all_self_attns]
+                if v is not None
+            )
         return BaseModelOutputWithPast(
-            last_hidden_state=x, past_key_values=next_cache, hidden_states=all_hidden_states, attentions=all_self_attns
+            last_hidden_state=x,
+            past_key_values=next_cache,
+            hidden_states=all_hidden_states,
+            attentions=all_self_attns,
         )
 
 
@@ -638,7 +686,9 @@ class Attention(nn.Module):
         self.num_heads = num_heads
         self.dropout = dropout
         self.head_dim = embed_dim // num_heads
-        assert self.head_dim * num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
+        assert (
+            self.head_dim * num_heads == self.embed_dim
+        ), "embed_dim must be divisible by num_heads"
         self.scaling = self.head_dim ** -0.5
 
         self.encoder_decoder_attention = encoder_decoder_attention
@@ -649,7 +699,11 @@ class Attention(nn.Module):
         self.cache_key = "encoder_decoder" if self.encoder_decoder_attention else "self"
 
     def _shape(self, tensor, seq_len, bsz):
-        return tensor.contiguous().view(seq_len, bsz * self.num_heads, self.head_dim).transpose(0, 1)
+        return (
+            tensor.contiguous()
+            .view(seq_len, bsz * self.num_heads, self.head_dim)
+            .transpose(0, 1)
+        )
 
     def forward(
         self,
@@ -693,7 +747,9 @@ class Attention(nn.Module):
             v = self._shape(v, -1, bsz)
 
         if saved_state is not None:
-            k, v, key_padding_mask = self._use_saved_state(k, v, saved_state, key_padding_mask, static_kv, bsz)
+            k, v, key_padding_mask = self._use_saved_state(
+                k, v, saved_state, key_padding_mask, static_kv, bsz
+            )
 
         # Update cache
         layer_state[self.cache_key] = {
@@ -708,7 +764,9 @@ class Attention(nn.Module):
         assert attn_weights.size() == (bsz * self.num_heads, tgt_len, src_len)
 
         if attn_mask is not None:
-            attn_weights = attn_weights.view(bsz, self.num_heads, tgt_len, src_len) + attn_mask
+            attn_weights = (
+                attn_weights.view(bsz, self.num_heads, tgt_len, src_len) + attn_mask
+            )
             attn_weights = attn_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
         # This is part of a workaround to get around fork/join parallelism not supporting Optional types.
@@ -725,16 +783,14 @@ class Attention(nn.Module):
             attn_weights = attn_weights.masked_fill(reshaped, float("-inf"))
             attn_weights = attn_weights.view(bsz * self.num_heads, tgt_len, src_len)
         attn_weights = F.softmax(attn_weights, dim=-1)
-        attn_probs = F.dropout(
-            attn_weights,
-            p=self.dropout,
-            training=self.training,
-        )
+        attn_probs = F.dropout(attn_weights, p=self.dropout, training=self.training,)
 
         assert v is not None
         attn_output = torch.bmm(attn_probs, v)
         assert attn_output.size() == (bsz * self.num_heads, tgt_len, self.head_dim)
-        attn_output = attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)
+        attn_output = (
+            attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)
+        )
         attn_output = self.out_proj(attn_output)
         if output_attentions:
             attn_weights = attn_weights.view(bsz, self.num_heads, tgt_len, src_len)
@@ -763,12 +819,16 @@ class Attention(nn.Module):
                 assert v is not None
                 v = torch.cat([prev_value, v], dim=1)
         assert k is not None and v is not None
-        prev_key_padding_mask: Optional[Tensor] = saved_state.get("prev_key_padding_mask", None)
+        prev_key_padding_mask: Optional[Tensor] = saved_state.get(
+            "prev_key_padding_mask", None
+        )
         if prev_key_padding_mask is not None:
             if static_kv:
                 new_key_padding_mask = prev_key_padding_mask
             else:
-                new_key_padding_mask = torch.cat([prev_key_padding_mask, key_padding_mask], dim=1)
+                new_key_padding_mask = torch.cat(
+                    [prev_key_padding_mask, key_padding_mask], dim=1
+                )
         else:
             new_key_padding_mask = key_padding_mask
         return k, v, new_key_padding_mask
@@ -780,11 +840,7 @@ class BartClassificationHead(nn.Module):
     # This can trivially be shared with RobertaClassificationHead
 
     def __init__(
-        self,
-        input_dim,
-        inner_dim,
-        num_classes,
-        pooler_dropout,
+        self, input_dim, inner_dim, num_classes, pooler_dropout,
     ):
         super().__init__()
         self.dense = nn.Linear(input_dim, inner_dim)
@@ -808,7 +864,9 @@ class LearnedPositionalEmbedding(nn.Embedding):
     position ids are passed to the forward function.
     """
 
-    def __init__(self, num_embeddings: int, embedding_dim: int, padding_idx: int, offset):
+    def __init__(
+        self, num_embeddings: int, embedding_dim: int, padding_idx: int, offset
+    ):
         # Bart is set up so that if padding_idx is specified then offset the embedding ids by 2
         # and adjust num_embeddings appropriately. Other models dont have this hack
         self.offset = offset
@@ -820,10 +878,14 @@ class LearnedPositionalEmbedding(nn.Embedding):
         """Input is expected to be of size [bsz x seqlen]."""
         bsz, seq_len = input_ids.shape[:2]
         if use_cache:
-            positions = input_ids.data.new(1, 1).fill_(seq_len - 1)  # called before slicing
+            positions = input_ids.data.new(1, 1).fill_(
+                seq_len - 1
+            )  # called before slicing
         else:
             # starts at 0, ends at 1-seq_len
-            positions = torch.arange(seq_len, dtype=torch.long, device=self.weight.device)
+            positions = torch.arange(
+                seq_len, dtype=torch.long, device=self.weight.device
+            )
         return super().forward(positions + self.offset)
 
 
@@ -896,16 +958,28 @@ class BartModel(PretrainedBartModel):
         if decoder_input_ids is None:
             use_cache = False
 
-        output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
+        output_attentions = (
+            output_attentions
+            if output_attentions is not None
+            else self.config.output_attentions
+        )
         output_hidden_states = (
-            output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
+            output_hidden_states
+            if output_hidden_states is not None
+            else self.config.output_hidden_states
         )
         use_cache = use_cache if use_cache is not None else self.config.use_cache
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        return_dict = (
+            return_dict if return_dict is not None else self.config.use_return_dict
+        )
 
         # make masks if user doesn't supply
         if not use_cache:
-            decoder_input_ids, decoder_padding_mask, causal_mask = _prepare_bart_decoder_inputs(
+            (
+                decoder_input_ids,
+                decoder_padding_mask,
+                causal_mask,
+            ) = _prepare_bart_decoder_inputs(
                 self.config,
                 input_ids,
                 decoder_input_ids=decoder_input_ids,
@@ -974,17 +1048,24 @@ class BartModel(PretrainedBartModel):
 
 
 @add_start_docstrings(
-    "The BART Model with a language modeling head. Can be used for summarization.", BART_START_DOCSTRING
+    "The BART Model with a language modeling head. Can be used for summarization.",
+    BART_START_DOCSTRING,
 )
 class BartForConditionalGeneration(PretrainedBartModel):
     base_model_prefix = "model"
-    authorized_missing_keys = [r"final_logits_bias", r"encoder\.version", r"decoder\.version"]
+    authorized_missing_keys = [
+        r"final_logits_bias",
+        r"encoder\.version",
+        r"decoder\.version",
+    ]
 
     def __init__(self, config: BartConfig):
         super().__init__(config)
         base_model = BartModel(config)
         self.model = base_model
-        self.register_buffer("final_logits_bias", torch.zeros((1, self.model.shared.num_embeddings)))
+        self.register_buffer(
+            "final_logits_bias", torch.zeros((1, self.model.shared.num_embeddings))
+        )
 
     def resize_token_embeddings(self, new_num_tokens: int) -> nn.Embedding:
         old_num_tokens = self.model.shared.num_embeddings
@@ -993,16 +1074,23 @@ class BartForConditionalGeneration(PretrainedBartModel):
         self._resize_final_logits_bias(new_num_tokens, old_num_tokens)
         return new_embeddings
 
-    def _resize_final_logits_bias(self, new_num_tokens: int, old_num_tokens: int) -> None:
+    def _resize_final_logits_bias(
+        self, new_num_tokens: int, old_num_tokens: int
+    ) -> None:
         if new_num_tokens <= old_num_tokens:
             new_bias = self.final_logits_bias[:, :new_num_tokens]
         else:
-            extra_bias = torch.zeros((1, new_num_tokens - old_num_tokens), device=self.final_logits_bias.device)
+            extra_bias = torch.zeros(
+                (1, new_num_tokens - old_num_tokens),
+                device=self.final_logits_bias.device,
+            )
             new_bias = torch.cat([self.final_logits_bias, extra_bias], dim=1)
         self.register_buffer("final_logits_bias", new_bias)
 
     @add_start_docstrings_to_callable(BART_INPUTS_DOCSTRING)
-    @replace_return_docstrings(output_type=Seq2SeqLMOutput, config_class=_CONFIG_FOR_DOC)
+    @replace_return_docstrings(
+        output_type=Seq2SeqLMOutput, config_class=_CONFIG_FOR_DOC
+    )
     @add_end_docstrings(BART_GENERATION_EXAMPLE)
     def forward(
         self,
@@ -1065,7 +1153,9 @@ class BartForConditionalGeneration(PretrainedBartModel):
                 FutureWarning,
             )
             past_key_values = unused.pop("decoder_past_key_values")
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        return_dict = (
+            return_dict if return_dict is not None else self.config.use_return_dict
+        )
 
         if labels is not None:
             use_cache = False
@@ -1085,17 +1175,23 @@ class BartForConditionalGeneration(PretrainedBartModel):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
         )
-        lm_logits = F.linear(outputs[0], self.model.shared.weight, bias=self.final_logits_bias)
+        lm_logits = F.linear(
+            outputs[0], self.model.shared.weight, bias=self.final_logits_bias
+        )
 
         masked_lm_loss = None
         if labels is not None:
             loss_fct = CrossEntropyLoss()
             # TODO(SS): do we need to ignore pad tokens in labels?
-            masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
+            masked_lm_loss = loss_fct(
+                lm_logits.view(-1, self.config.vocab_size), labels.view(-1)
+            )
 
         if not return_dict:
             output = (lm_logits,) + outputs[1:]
-            return ((masked_lm_loss,) + output) if masked_lm_loss is not None else output
+            return (
+                ((masked_lm_loss,) + output) if masked_lm_loss is not None else output
+            )
 
         return Seq2SeqLMOutput(
             loss=masked_lm_loss,
@@ -1109,7 +1205,13 @@ class BartForConditionalGeneration(PretrainedBartModel):
         )
 
     def prepare_inputs_for_generation(
-        self, decoder_input_ids, past, attention_mask, use_cache, encoder_outputs, **kwargs
+        self,
+        decoder_input_ids,
+        past,
+        attention_mask,
+        use_cache,
+        encoder_outputs,
+        **kwargs,
     ):
         return {
             "input_ids": None,  # encoder_outputs is defined. input_ids not needed
@@ -1130,7 +1232,9 @@ class BartForConditionalGeneration(PretrainedBartModel):
 
     def _force_token_ids_generation(self, scores, token_id) -> None:
         """force one of token_ids to be generated by setting prob of all other tokens to 0 (logprob=-float("inf"))"""
-        scores[:, [x for x in range(self.config.vocab_size) if x != token_id]] = -float("inf")
+        scores[:, [x for x in range(self.config.vocab_size) if x != token_id]] = -float(
+            "inf"
+        )
 
     @staticmethod
     def _reorder_cache(past, beam_idx):
@@ -1138,7 +1242,8 @@ class BartForConditionalGeneration(PretrainedBartModel):
         for layer_past in past:
             # get the correct batch idx from decoder layer's batch dim for cross and self-attn
             layer_past_new = {
-                attn_key: _reorder_buffer(attn_cache, beam_idx) for attn_key, attn_cache in layer_past.items()
+                attn_key: _reorder_buffer(attn_cache, beam_idx)
+                for attn_key, attn_cache in layer_past.items()
             }
             reordered_past.append(layer_past_new)
         return reordered_past
@@ -1159,10 +1264,7 @@ class BartForSequenceClassification(PretrainedBartModel):
         super().__init__(config, **kwargs)
         self.model = BartModel(config)
         self.classification_head = BartClassificationHead(
-            config.d_model,
-            config.d_model,
-            config.num_labels,
-            config.classif_dropout,
+            config.d_model, config.d_model, config.num_labels, config.classif_dropout,
         )
         self.model._init_weights(self.classification_head.dense)
         self.model._init_weights(self.classification_head.out_proj)
@@ -1193,7 +1295,9 @@ class BartForSequenceClassification(PretrainedBartModel):
             Indices should be in :obj:`[0, ..., config.num_labels - 1]`.
             If :obj:`config.num_labels > 1` a classification loss is computed (Cross-Entropy).
         """
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        return_dict = (
+            return_dict if return_dict is not None else self.config.use_return_dict
+        )
         if labels is not None:
             use_cache = False
 
@@ -1212,7 +1316,9 @@ class BartForSequenceClassification(PretrainedBartModel):
         eos_mask = input_ids.eq(self.config.eos_token_id)
         if len(torch.unique(eos_mask.sum(1))) > 1:
             raise ValueError("All examples must have the same number of <eos> tokens.")
-        sentence_representation = x[eos_mask, :].view(x.size(0), -1, x.size(-1))[:, -1, :]
+        sentence_representation = x[eos_mask, :].view(x.size(0), -1, x.size(-1))[
+            :, -1, :
+        ]
         logits = self.classification_head(sentence_representation)
 
         loss = None
@@ -1284,7 +1390,9 @@ class BartForQuestionAnswering(PretrainedBartModel):
             Positions are clamped to the length of the sequence (`sequence_length`).
             Position outside of the sequence are not taken into account for computing the loss.
         """
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        return_dict = (
+            return_dict if return_dict is not None else self.config.use_return_dict
+        )
         if start_positions is not None and end_positions is not None:
             use_cache = False
 
@@ -1325,10 +1433,7 @@ class BartForQuestionAnswering(PretrainedBartModel):
             total_loss = (start_loss + end_loss) / 2
 
         if not return_dict:
-            output = (
-                start_logits,
-                end_logits,
-            ) + outputs[1:]
+            output = (start_logits, end_logits,) + outputs[1:]
             return ((total_loss,) + output) if total_loss is not None else output
 
         return Seq2SeqQuestionAnsweringModelOutput(
@@ -1350,7 +1455,9 @@ class SinusoidalPositionalEmbedding(nn.Embedding):
     def __init__(self, num_positions, embedding_dim, padding_idx=None):
         super().__init__(num_positions, embedding_dim)
         if embedding_dim % 2 != 0:
-            raise NotImplementedError(f"odd embedding_dim {embedding_dim} not supported")
+            raise NotImplementedError(
+                f"odd embedding_dim {embedding_dim} not supported"
+            )
         self.weight = self._init_weight(self.weight)
 
     @staticmethod
@@ -1360,9 +1467,14 @@ class SinusoidalPositionalEmbedding(nn.Embedding):
         """
         n_pos, dim = out.shape
         position_enc = np.array(
-            [[pos / np.power(10000, 2 * (j // 2) / dim) for j in range(dim)] for pos in range(n_pos)]
+            [
+                [pos / np.power(10000, 2 * (j // 2) / dim) for j in range(dim)]
+                for pos in range(n_pos)
+            ]
         )
-        out[:, 0 : dim // 2] = torch.FloatTensor(np.sin(position_enc[:, 0::2]))  # This line breaks for odd n_pos
+        out[:, 0 : dim // 2] = torch.FloatTensor(
+            np.sin(position_enc[:, 0::2])
+        )  # This line breaks for odd n_pos
         out[:, dim // 2 :] = torch.FloatTensor(np.cos(position_enc[:, 1::2]))
         out.detach_()
         out.requires_grad = False
@@ -1373,8 +1485,12 @@ class SinusoidalPositionalEmbedding(nn.Embedding):
         """Input is expected to be of size [bsz x seqlen]."""
         bsz, seq_len = input_ids.shape[:2]
         if use_cache:
-            positions = input_ids.data.new(1, 1).fill_(seq_len - 1)  # called before slicing
+            positions = input_ids.data.new(1, 1).fill_(
+                seq_len - 1
+            )  # called before slicing
         else:
             # starts at 0, ends at 1-seq_len
-            positions = torch.arange(seq_len, dtype=torch.long, device=self.weight.device)
+            positions = torch.arange(
+                seq_len, dtype=torch.long, device=self.weight.device
+            )
         return super().forward(positions)

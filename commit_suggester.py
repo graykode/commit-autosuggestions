@@ -68,6 +68,7 @@ def main(args):
     )
     print(commit_message)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Code to collect commits on github")
     parser.add_argument(

@@ -21,7 +21,11 @@ from matorage.torch import Dataset
 
 
 try:
-    from .callbacks import Seq2SeqLoggingCallback, get_checkpoint_callback, get_early_stopping_callback
+    from .callbacks import (
+        Seq2SeqLoggingCallback,
+        get_checkpoint_callback,
+        get_early_stopping_callback,
+    )
     from .utils import (
         ROUGE_KEYS,
         LegacySeq2SeqDataset,
@@ -40,7 +44,11 @@ try:
         use_task_specific_params,
     )
 except ImportError:
-    from callbacks import Seq2SeqLoggingCallback, get_checkpoint_callback, get_early_stopping_callback
+    from callbacks import (
+        Seq2SeqLoggingCallback,
+        get_checkpoint_callback,
+        get_early_stopping_callback,
+    )
     from utils import (
         ROUGE_KEYS,
         LegacySeq2SeqDataset,
@@ -83,8 +91,12 @@ class SummarizationModule(BaseTransformer):
             "val": self.hparams.val_max_target_length,
             "test": self.hparams.test_max_target_length,
         }
-        assert self.target_lens["train"] <= self.target_lens["val"], f"target_lens: {self.target_lens}"
-        assert self.target_lens["train"] <= self.target_lens["test"], f"target_lens: {self.target_lens}"
+        assert (
+            self.target_lens["train"] <= self.target_lens["val"]
+        ), f"target_lens: {self.target_lens}"
+        assert (
+            self.target_lens["train"] <= self.target_lens["test"]
+        ), f"target_lens: {self.target_lens}"
 
         if self.hparams.freeze_embeds:
             self.freeze_embeds()
@@ -95,13 +107,27 @@ class SummarizationModule(BaseTransformer):
         self.hparams.git_sha = get_git_info()["repo_sha"]
         self.num_workers = hparams.num_workers
         self.decoder_start_token_id = None  # default to config
-        if self.model.config.decoder_start_token_id is None and isinstance(self.tokenizer, MBartTokenizer):
-            self.decoder_start_token_id = self.tokenizer.lang_code_to_id[hparams.tgt_lang]
+        if self.model.config.decoder_start_token_id is None and isinstance(
+            self.tokenizer, MBartTokenizer
+        ):
+            self.decoder_start_token_id = self.tokenizer.lang_code_to_id[
+                hparams.tgt_lang
+            ]
             self.model.config.decoder_start_token_id = self.decoder_start_token_id
 
-        self.eval_beams = self.model.config.num_beams if self.hparams.eval_beams is None else self.hparams.eval_beams
-        assert self.eval_beams >= 1, f"got self.eval_beams={self.eval_beams}. Need an integer > 1"
-        self.val_metric = self.default_val_metric if self.hparams.val_metric is None else self.hparams.val_metric
+        self.eval_beams = (
+            self.model.config.num_beams
+            if self.hparams.eval_beams is None
+            else self.hparams.eval_beams
+        )
+        assert (
+            self.eval_beams >= 1
+        ), f"got self.eval_beams={self.eval_beams}. Need an integer > 1"
+        self.val_metric = (
+            self.default_val_metric
+            if self.hparams.val_metric is None
+            else self.hparams.val_metric
+        )
 
     def freeze_embeds(self):
         """Freeze token embeddings and positional embeddings for bart, just token embeddings for t5."""
@@ -133,7 +159,13 @@ class SummarizationModule(BaseTransformer):
         else:
             decoder_input_ids = shift_tokens_right(tgt_ids, pad_token_id)
 
-        outputs = self(src_ids, src_patch, attention_mask=src_mask, decoder_input_ids=decoder_input_ids, use_cache=False)
+        outputs = self(
+            src_ids,
+            src_patch,
+            attention_mask=src_mask,
+            decoder_input_ids=decoder_input_ids,
+            use_cache=False,
+        )
         lm_logits = outputs[0]
         if self.hparams.label_smoothing == 0:
             # Same behavior as modeling_bart.py, besides ignoring pad_token_id
@@ -157,7 +189,9 @@ class SummarizationModule(BaseTransformer):
 
         logs = {name: loss for name, loss in zip(self.loss_names, loss_tensors)}
         # tokens per batch
-        logs["tpb"] = batch[0].long().ne(self.pad).sum() + batch[3].long().ne(self.pad).sum()
+        logs["tpb"] = (
+            batch[0].long().ne(self.pad).sum() + batch[3].long().ne(self.pad).sum()
+        )
         return {"loss": loss_tensors[0], "log": logs}
 
     def validation_step(self, batch, batch_idx) -> Dict:
@@ -165,17 +199,29 @@ class SummarizationModule(BaseTransformer):
 
     def validation_epoch_end(self, outputs, prefix="val") -> Dict:
         self.step_count += 1
-        losses = {k: torch.stack([x[k] for x in outputs]).mean() for k in self.loss_names}
+        losses = {
+            k: torch.stack([x[k] for x in outputs]).mean() for k in self.loss_names
+        }
         loss = losses["loss"]
-        rouges = {k: np.array([x[k] for x in outputs]).mean() for k in self.metric_names + ["gen_time", "gen_len"]}
-        rouge_tensor: torch.FloatTensor = torch.tensor(rouges[self.val_metric]).type_as(loss)
+        rouges = {
+            k: np.array([x[k] for x in outputs]).mean()
+            for k in self.metric_names + ["gen_time", "gen_len"]
+        }
+        rouge_tensor: torch.FloatTensor = torch.tensor(rouges[self.val_metric]).type_as(
+            loss
+        )
         rouges.update({k: v.item() for k, v in losses.items()})
         losses.update(rouges)
         metrics = {f"{prefix}_avg_{k}": x for k, x in losses.items()}
         metrics["step_count"] = self.step_count
         self.save_metrics(metrics, prefix)  # writes to self.metrics_save_path
         preds = flatten_list([x["preds"] for x in outputs])
-        return {"log": metrics, "preds": preds, f"{prefix}_loss": loss, f"{prefix}_{self.val_metric}": rouge_tensor}
+        return {
+            "log": metrics,
+            "preds": preds,
+            f"{prefix}_loss": loss,
+            f"{prefix}_{self.val_metric}": rouge_tensor,
+        }
 
     def save_metrics(self, latest_metrics, type_path) -> None:
         self.metrics[type_path].append(latest_metrics)
@@ -200,7 +246,9 @@ class SummarizationModule(BaseTransformer):
         base_metrics = {name: loss for name, loss in zip(self.loss_names, loss_tensors)}
         rouge: Dict = self.calc_generative_metrics(preds, target)
         summ_len = np.mean(lmap(len, generated_ids))
-        base_metrics.update(gen_time=gen_time, gen_len=summ_len, preds=preds, target=target, **rouge)
+        base_metrics.update(
+            gen_time=gen_time, gen_len=summ_len, preds=preds, target=target, **rouge
+        )
         return base_metrics
 
     def test_step(self, batch, batch_idx):
@@ -213,10 +261,10 @@ class SummarizationModule(BaseTransformer):
         max_target_length = self.target_lens[type_path]
         data_config = DataConfig(
             endpoint=args.endpoint,
-            access_key=os.environ['access_key'],
-            secret_key=os.environ['secret_key'],
+            access_key=os.environ["access_key"],
+            secret_key=os.environ["secret_key"],
             region=args.region,
-            dataset_name='commit-autosuggestions',
+            dataset_name="commit-autosuggestions",
             additional={
                 "mode": ("training" if type_path == "train" else "evaluation"),
                 "max_source_length": self.hparams.max_source_length,
@@ -224,15 +272,17 @@ class SummarizationModule(BaseTransformer):
                 "url": args.url,
             },
             attributes=[
-                ('input_ids', 'int32', (self.hparams.max_source_length,)),
-                ('attention_masks', 'int32', (self.hparams.max_source_length,)),
-                ('patch_ids', 'int32', (self.hparams.max_source_length,)),
-                ('targets', 'int32', (max_target_length,))
-            ]
+                ("input_ids", "int32", (self.hparams.max_source_length,)),
+                ("attention_masks", "int32", (self.hparams.max_source_length,)),
+                ("patch_ids", "int32", (self.hparams.max_source_length,)),
+                ("targets", "int32", (max_target_length,)),
+            ],
         )
         return Dataset(config=data_config, clear=True)
 
-    def get_dataloader(self, type_path: str, batch_size: int, shuffle: bool = False) -> DataLoader:
+    def get_dataloader(
+        self, type_path: str, batch_size: int, shuffle: bool = False
+    ) -> DataLoader:
         dataset = self.get_dataset(type_path)
         sampler = None
 
@@ -246,7 +296,9 @@ class SummarizationModule(BaseTransformer):
         return dataloader
 
     def train_dataloader(self) -> DataLoader:
-        dataloader = self.get_dataloader("train", batch_size=self.hparams.train_batch_size, shuffle=True)
+        dataloader = self.get_dataloader(
+            "train", batch_size=self.hparams.train_batch_size, shuffle=True
+        )
         return dataloader
 
     def val_dataloader(self) -> DataLoader:
@@ -259,23 +311,18 @@ class SummarizationModule(BaseTransformer):
     def add_model_specific_args(parser, root_dir):
         BaseTransformer.add_model_specific_args(parser, root_dir)
         add_generic_args(parser, root_dir)
-        parser.add_argument(
-            "--url",
-            type=str,
-            required=True,
-            help="github url"
-        )
+        parser.add_argument("--url", type=str, required=True, help="github url")
         parser.add_argument(
             "--endpoint",
             type=str,
             required=True,
-            help='matorage endpoint, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html'
+            help="matorage endpoint, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html",
         )
         parser.add_argument(
             "--region",
             type=str,
             default=None,
-            help='matorage s3 region, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html'
+            help="matorage s3 region, check document of matorage: https://matorage.readthedocs.io/en/stable/storage.html",
         )
         parser.add_argument(
             "--max_source_length",
@@ -308,14 +355,43 @@ class SummarizationModule(BaseTransformer):
         parser.add_argument("--freeze_encoder", action="store_true")
         parser.add_argument("--freeze_embeds", action="store_true")
         parser.add_argument("--sortish_sampler", action="store_true", default=False)
-        parser.add_argument("--logger_name", type=str, choices=["default", "wandb", "wandb_shared"], default="default")
-        parser.add_argument("--n_train", type=int, default=-1, required=False, help="# examples. -1 means use all.")
-        parser.add_argument("--n_val", type=int, default=500, required=False, help="# examples. -1 means use all.")
-        parser.add_argument("--n_test", type=int, default=-1, required=False, help="# examples. -1 means use all.")
         parser.add_argument(
-            "--task", type=str, default="summarization", required=False, help="# examples. -1 means use all."
+            "--logger_name",
+            type=str,
+            choices=["default", "wandb", "wandb_shared"],
+            default="default",
         )
-        parser.add_argument("--label_smoothing", type=float, default=0.0, required=False)
+        parser.add_argument(
+            "--n_train",
+            type=int,
+            default=-1,
+            required=False,
+            help="# examples. -1 means use all.",
+        )
+        parser.add_argument(
+            "--n_val",
+            type=int,
+            default=500,
+            required=False,
+            help="# examples. -1 means use all.",
+        )
+        parser.add_argument(
+            "--n_test",
+            type=int,
+            default=-1,
+            required=False,
+            help="# examples. -1 means use all.",
+        )
+        parser.add_argument(
+            "--task",
+            type=str,
+            default="summarization",
+            required=False,
+            help="# examples. -1 means use all.",
+        )
+        parser.add_argument(
+            "--label_smoothing", type=float, default=0.0, required=False
+        )
         parser.add_argument("--src_lang", type=str, default="", required=False)
         parser.add_argument("--tgt_lang", type=str, default="", required=False)
         parser.add_argument("--eval_beams", type=int, default=None, required=False)
@@ -348,7 +424,11 @@ class TranslationModule(SummarizationModule):
 def main(args, model=None) -> SummarizationModule:
     Path(args.output_dir).mkdir(exist_ok=True)
     if len(os.listdir(args.output_dir)) > 3 and args.do_train:
-        raise ValueError("Output directory ({}) already exists and is not empty.".format(args.output_dir))
+        raise ValueError(
+            "Output directory ({}) already exists and is not empty.".format(
+                args.output_dir
+            )
+        )
     if model is None:
         if args.task == "summarization":
             model: SummarizationModule = SummarizationModule(args)
@@ -371,7 +451,9 @@ def main(args, model=None) -> SummarizationModule:
         return model
 
     model.hparams.test_checkpoint = ""
-    checkpoints = list(sorted(glob.glob(os.path.join(args.output_dir, "*.ckpt"), recursive=True)))
+    checkpoints = list(
+        sorted(glob.glob(os.path.join(args.output_dir, "*.ckpt"), recursive=True))
+    )
     if checkpoints:
         model.hparams.test_checkpoint = checkpoints[-1]
         trainer.resume_from_checkpoint = checkpoints[-1]
