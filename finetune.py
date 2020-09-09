@@ -115,8 +115,8 @@ class SummarizationModule(BaseTransformer):
             for d in [self.model.encoder, self.model.decoder]:
                 freeze_params(d.embed_tokens)
 
-    def forward(self, input_ids, **kwargs):
-        return self.model(input_ids, **kwargs)
+    def forward(self, input_ids, patch_ids, **kwargs):
+        return self.model(input_ids, patch_ids, **kwargs)
 
     def ids_to_clean_text(self, generated_ids: List[int]):
         gen_text = self.tokenizer.batch_decode(
@@ -133,7 +133,7 @@ class SummarizationModule(BaseTransformer):
         else:
             decoder_input_ids = shift_tokens_right(tgt_ids, pad_token_id)
 
-        outputs = self(src_ids, attention_mask=src_mask, decoder_input_ids=decoder_input_ids, use_cache=False)
+        outputs = self(src_ids, src_patch, attention_mask=src_mask, decoder_input_ids=decoder_input_ids, use_cache=False)
         lm_logits = outputs[0]
         if self.hparams.label_smoothing == 0:
             # Same behavior as modeling_bart.py, besides ignoring pad_token_id

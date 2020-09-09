@@ -114,6 +114,7 @@ class GenerationMixin:
     def generate(
         self,
         input_ids: Optional[torch.LongTensor] = None,
+        patch_ids: Optional[torch.LongTensor] = None,
         max_length: Optional[int] = None,
         min_length: Optional[int] = None,
         do_sample: Optional[bool] = None,
@@ -396,17 +397,21 @@ class GenerationMixin:
 
             # get encoder and store encoder outputs
             encoder = self.get_encoder()
-            encoder_outputs: ModelOutput = encoder(input_ids, attention_mask=attention_mask, return_dict=True)
+            encoder_outputs: ModelOutput = encoder(input_ids, patch_ids, attention_mask=attention_mask, return_dict=True)
 
         # Expand input ids if num_beams > 1 or num_return_sequences > 1
         if num_return_sequences > 1 or num_beams > 1:
             input_ids_len = input_ids.shape[-1]
             input_ids = input_ids.unsqueeze(1).expand(batch_size, effective_batch_mult * num_beams, input_ids_len)
+            patch_ids = patch_ids.unsqueeze(1).expand(batch_size, effective_batch_mult * num_beams, input_ids_len)
             attention_mask = attention_mask.unsqueeze(1).expand(
                 batch_size, effective_batch_mult * num_beams, input_ids_len
             )
 
             input_ids = input_ids.contiguous().view(
+                effective_batch_size * num_beams, input_ids_len
+            )  # shape: (batch_size * num_return_sequences * num_beams, cur_len)
+            patch_ids = patch_ids.contiguous().view(
                 effective_batch_size * num_beams, input_ids_len
             )  # shape: (batch_size * num_return_sequences * num_beams, cur_len)
             attention_mask = attention_mask.contiguous().view(

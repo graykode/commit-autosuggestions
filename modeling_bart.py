@@ -307,7 +307,7 @@ class BartEncoder(nn.Module):
                 self.padding_idx,
                 config.extra_pos_embeddings,
             )
-        self.embed_patches = nn.Embedding(3, config.d_model)
+        self.embed_patches = nn.Embedding(3, config.d_model, padding_idx=0)
         self.layers = nn.ModuleList([EncoderLayer(config) for _ in range(config.encoder_layers)])
         self.layernorm_embedding = LayerNorm(embed_dim) if config.normalize_embedding else nn.Identity()
         # mbart has one extra layer_norm
@@ -1113,6 +1113,7 @@ class BartForConditionalGeneration(PretrainedBartModel):
     ):
         return {
             "input_ids": None,  # encoder_outputs is defined. input_ids not needed
+            "patch_ids": None,  # encoder_outputs is defined. input_ids not needed
             "encoder_outputs": encoder_outputs,
             "past_key_values": past,
             "decoder_input_ids": decoder_input_ids,
