@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .gitcommit import diff_parse
+from .gitcommit import diff_parse, truncate
 
 __all__ = [
-    'diff_parse'
+    'diff_parse',
+    'truncate',
 ]
