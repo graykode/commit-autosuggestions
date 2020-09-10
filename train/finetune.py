@@ -12,7 +12,7 @@ import pytorch_lightning as pl
 import torch
 from torch.utils.data import DataLoader
 
-from lightning_base import BaseTransformer, add_generic_args, generic_train
+from train.lightning_base import BaseTransformer, add_generic_args, generic_train
 from transformers import MBartTokenizer, T5ForConditionalGeneration
 from transformers.modeling_bart import shift_tokens_right
 
@@ -260,16 +260,16 @@ class SummarizationModule(BaseTransformer):
     def get_dataset(self, type_path) -> Seq2SeqDataset:
         max_target_length = self.target_lens[type_path]
         data_config = DataConfig(
-            endpoint=args.endpoint,
+            endpoint=self.hparams.endpoint,
             access_key=os.environ["access_key"],
             secret_key=os.environ["secret_key"],
-            region=args.region,
+            region=self.hparams.region,
             dataset_name="commit-autosuggestions",
             additional={
                 "mode": ("training" if type_path == "train" else "evaluation"),
                 "max_source_length": self.hparams.max_source_length,
                 "max_target_length": max_target_length,
-                "url": args.url,
+                "url": self.hparams.url,
             },
             attributes=[
                 ("input_ids", "int32", (self.hparams.max_source_length,)),
@@ -462,13 +462,3 @@ def main(args, model=None) -> SummarizationModule:
     # test() without a model tests using the best checkpoint automatically
     trainer.test()
     return model
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser = pl.Trainer.add_argparse_args(parser)
-    parser = SummarizationModule.add_model_specific_args(parser, os.getcwd())
-
-    args = parser.parse_args()
-
-    main(args)

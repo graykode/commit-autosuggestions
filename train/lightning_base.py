@@ -21,7 +21,7 @@ from transformers import (
     PretrainedConfig,
     PreTrainedTokenizer,
 )
-from modeling_bart import BartForConditionalGeneration
+from train.modeling_bart import BartForConditionalGeneration
 
 from transformers.optimization import (
     Adafactor,

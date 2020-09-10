@@ -39,7 +39,7 @@ from transformers.file_utils import (
     is_torch_tpu_available,
     replace_return_docstrings,
 )
-from generation_utils import GenerationMixin
+from train.generation_utils import GenerationMixin
 import logging
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name

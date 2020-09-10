@@ -2,6 +2,7 @@ whatthepatch
 gitpython
 matorage
 transformers
+packaging
 
 psutil
 sacrebleu
