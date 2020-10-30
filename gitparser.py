@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import re
 import json
 import jsonlines
 import argparse
@@ -23,91 +24,85 @@ from multiprocessing.pool import Pool
 from transformers import RobertaTokenizer
 from pydriller import GitRepository, RepositoryMining
 
+def message_cleaner(message):
+    msg = message.split("\n")[0]
+    msg = re.sub(r"(\(|)#([0-9])+(\)|)", "", msg)
+    return msg
 
-def jobs(repo_paths, args):
-    repo, paths = repo_paths
+
+def jobs(repo, args):
     repo_path = os.path.join(args.repos_dir, repo)
-
     if os.path.exists(repo_path):
-        gr = GitRepository(repo_path)
+        for commit in RepositoryMining(
+            repo_path, only_modifications_with_file_types=['.py']
+        ).traverse_commits():
+            cleaned_message = message_cleaner(commit.msg)
+            tokenized_message = args.tokenizer.tokenize(cleaned_message)
+            if len(tokenized_message) > args.max_target_length:
+                continue
 
-        for path in paths:
-            commits = gr.get_commits_modified_file(path)
-            for commit in RepositoryMining(
-                repo_path, only_commits=commits
-            ).traverse_commits():
-                message = (commit.msg).split("\n")[0]
+            for mod in commit.modifications:
+                if not (mod.old_path and mod.new_path):
+                    continue
+                if os.path.splitext(mod.new_path)[1] != '.py':
+                    continue
+                if not mod.diff_parsed["added"]:
+                    continue
+                if not mod.diff_parsed["deleted"]:
+                    continue
 
                 added, deleted = [], []
-                for mod in commit.modifications:
-                    if mod.new_path == path:
-                        for line, code in mod.diff_parsed["added"]:
-                            added += args.tokenizer.tokenize(code)
-                            assert isinstance(added, list)
 
-                        for line, code in mod.diff_parsed["deleted"]:
-                            deleted += args.tokenizer.tokenize(code)
-                            assert isinstance(deleted, list)
+                for line, code in mod.diff_parsed["added"]:
+                    added.extend(args.tokenizer.tokenize(code))
 
-                        with jsonlines.open(args.output_file, mode="a") as writer:
-                            writer.write(
-                                {
-                                    "repo": repo,
-                                    "path": path,
-                                    "sha": commit.hash,
-                                    "msg": args.tokenizer.tokenize(message),
-                                    "added": added,
-                                    "deleted": deleted,
-                                }
-                            )
+                for line, code in mod.diff_parsed["deleted"]:
+                    deleted.extend(args.tokenizer.tokenize(code))
+
+                if len(added) + len(deleted) <= args.max_source_length:
+                    with jsonlines.open(args.output_file, mode="a") as writer:
+                        writer.write(
+                            {
+                                "msg": tokenized_message,
+                                "added": added,
+                                "deleted": deleted,
+                            }
+                        )
 
 def main(args):
-    repos = defaultdict(list)
-    with open(args.jsonl_file, encoding="utf-8") as f:
+    repos = set()
+    with open(args.repositories, encoding="utf-8") as f:
         for idx, line in enumerate(f):
             line = line.strip()
-            js = json.loads(line)
-            repos[js["repo"]].append(js["path"])
+            repos.add(line.replace('https://github.com/', ''))
 
     os.makedirs(args.output_dir, exist_ok=True)
-    args.output_file = os.path.join(args.output_dir, os.path.basename(args.jsonl_file))
+    args.output_file = os.path.join(args.output_dir, 'dataset.jsonl')
 
     func = partial(jobs, args=args)
     with Pool(processes=args.num_workers) as pool:
         with tqdm(total=len(repos)) as pbar:
-            for i, _ in tqdm(enumerate(pool.imap_unordered(func, repos.items()))):
+            for i, _ in tqdm(enumerate(pool.imap_unordered(func, repos))):
                 pbar.update()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument(
-        "--jsonl_file", type=str, required=True, help="jsonl file path."
-    )
-    parser.add_argument(
-        "--repos_dir",
-        type=str,
-        required=True,
-        help="directory that all repositories will be downloaded.",
-    )
-    parser.add_argument(
-        "--output_dir",
-        type=str,
-        required=True,
-        help="The output directory where the preprocessed data will be written.",
-    )
-    parser.add_argument(
-        "--tokenizer_name",
-        type=str,
-        default="microsoft/codebert-base",
-        help="The name of tokenizer",
-    )
-    parser.add_argument(
-        "--num_workers",
-        default=4,
-        type=int,
-        help="number of process",
-    )
+    parser.add_argument("--repositories", type=str, required=True,
+                        help="repositories file path.")
+    parser.add_argument("--repos_dir", type=str, required=True,
+                        help="directory that all repositories had been downloaded.",)
+    parser.add_argument("--output_dir", type=str, required=True,
+                        help="The output directory where the preprocessed data will be written.")
+    parser.add_argument("--tokenizer_name", type=str,
+                        default="microsoft/codebert-base", help="The name of tokenizer",)
+    parser.add_argument("--num_workers", default=4, type=int, help="number of process")
+    parser.add_argument("--max_source_length", default=256, type=int,
+                        help="The maximum total source sequence length after tokenization. Sequences longer "
+                             "than this will be truncated, sequences shorter will be padded.")
+    parser.add_argument("--max_target_length", default=128, type=int,
+                        help="The maximum total target sequence length after tokenization. Sequences longer "
+                             "than this will be truncated, sequences shorter will be padded.")
 
     args = parser.parse_args()
 

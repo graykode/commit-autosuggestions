@@ -14,10 +14,8 @@
 
 import os
 import git
-import json
 import argparse
 from git import Repo
-from tqdm import tqdm
 from time import sleep
 from queue import Queue
 from threading import Thread
@@ -55,7 +53,7 @@ class ClonePooler(object):
             )
             sleep(0.1)
             self.count += 1
-            print(f"{self.count}/{self.total_repos} {(self.count/self.total_repos) * 100}")
+            print(f"{self.count}/{self.total_repos} {format((self.count/self.total_repos) * 100, '.2f')}")
         except git.exc.InvalidGitRepositoryError:
             print(f'{repo} is not found.')
         except git.exc.GitError as e:
@@ -65,11 +63,10 @@ def main(args):
 
     os.makedirs(args.repos_dir, exist_ok=True)
     repos = set()
-    with open(args.jsonl_file, encoding="utf-8") as f:
+    with open(args.repositories, encoding="utf-8") as f:
         for idx, line in enumerate(f):
             line = line.strip()
-            js = json.loads(line)
-            repos.add(js['repo'])
+            repos.add(line.replace('https://github.com/', ''))
 
     pooler = ClonePooler(
         total_repos=len(repos)
@@ -80,8 +77,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--jsonl_file", type=str, required=True,
-                        help="jsonl file path.")
+    parser.add_argument("--repositories", type=str, required=True,
+                        help="repositories file path.")
     parser.add_argument("--repos_dir", type=str, required=True,
                         help="directory that all repositories will be downloaded.")
     parser.add_argument("--num_worker_threads", type=int, default=16,
