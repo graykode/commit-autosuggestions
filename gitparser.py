@@ -59,7 +59,7 @@ def jobs(repo, args):
                 for line, code in mod.diff_parsed["deleted"]:
                     deleted.extend(args.tokenizer.tokenize(code))
 
-                if len(added) + len(deleted) <= args.max_source_length:
+                if added and deleted and len(added) + len(deleted) <= args.max_source_length - 3:
                     with jsonlines.open(args.output_file, mode="a") as writer:
                         writer.write(
                             {
@@ -105,7 +105,7 @@ def main(args):
     )
     write_jsonl(
         data[int(n_data * 0.9):int(n_data * 0.95)],
-        path=args.output_dir, mode='validation'
+        path=args.output_dir, mode='valid'
     )
     write_jsonl(
         data[int(n_data * 0.95):],
