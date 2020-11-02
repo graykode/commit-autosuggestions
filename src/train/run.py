@@ -22,7 +22,6 @@ using a masked language modeling (MLM) loss.
 from __future__ import absolute_import
 import os
 import sys
-import bleu
 import pickle
 import torch
 import json
@@ -35,11 +34,14 @@ from itertools import cycle
 import torch.nn as nn
 from model import Seq2Seq
 from tqdm import tqdm, trange
-from customized_roberta import RobertaModel
 from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler,TensorDataset
 from torch.utils.data.distributed import DistributedSampler
 from transformers import (WEIGHTS_NAME, AdamW, get_linear_schedule_with_warmup,
                           RobertaConfig, RobertaTokenizer)
+
+import train.bleu as bleu
+from train.customized_roberta import RobertaModel
+
 MODEL_CLASSES = {'roberta': (RobertaConfig, RobertaModel, RobertaTokenizer)}
 
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
