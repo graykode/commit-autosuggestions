@@ -27,8 +27,12 @@ def tokenizing(code):
     )
     return json.loads(res.text)["tokens"]
 
-def preprocessing(diffs):
+def autocommit(diffs):
+    commit_message = []
     for idx, example in enumerate(whatthepatch.parse_patch(diffs)):
+        if not example.changes:
+            continue
+
         isadded, isdeleted = False, False
         added, deleted = [], []
         for change in example.changes:
@@ -46,7 +50,7 @@ def preprocessing(diffs):
                 data=json.dumps(data),
                 headers=args.headers
             )
-            print(json.loads(res.text))
+            commit_message.append(json.loads(res.text))
         else:
             data = {"idx": idx, "added": added, "deleted": deleted}
             res = requests.post(
@@ -54,7 +58,8 @@ def preprocessing(diffs):
                 data=json.dumps(data),
                 headers=args.headers
             )
-            print(json.loads(res.text))
+            commit_message.append(json.loads(res.text))
+    return commit_message
 
 def main():
 
@@ -64,6 +69,8 @@ def main():
     staged_files = [f.strip() for f in staged_files]
     diffs = "\n".join(staged_files)
 
+    message = autocommit(diffs=diffs)
+    print(message)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
