@@ -71,12 +71,15 @@ class Seq2Seq(nn.Module):
             return outputs
         else:
             #Predict 
-            preds=[]       
-            zero=torch.cuda.LongTensor(1).fill_(0)     
+            preds=[]
+            if source_ids.device.type == 'cuda':
+                zero=torch.cuda.LongTensor(1).fill_(0)
+            elif source_ids.device.type == 'cpu':
+                zero = torch.LongTensor(1).fill_(0)
             for i in range(source_ids.shape[0]):
                 context=encoder_output[:,i:i+1]
                 context_mask=source_mask[i:i+1,:]
-                beam = Beam(self.beam_size,self.sos_id,self.eos_id)
+                beam = Beam(self.beam_size,self.sos_id,self.eos_id, device=source_ids.device.type)
                 input_ids=beam.getCurrentState()
                 context=context.repeat(1, self.beam_size,1)
                 context_mask=context_mask.repeat(self.beam_size,1)
@@ -103,9 +106,12 @@ class Seq2Seq(nn.Module):
         
 
 class Beam(object):
-    def __init__(self, size,sos,eos):
+    def __init__(self, size,sos,eos, device):
         self.size = size
-        self.tt = torch.cuda
+        if device == 'cuda':
+            self.tt = torch.cuda
+        elif device == 'cpu':
+            self.tt = torch
         # The score for each translation on the beam.
         self.scores = self.tt.FloatTensor(size).zero_()
         # The backpointers at each time-step.

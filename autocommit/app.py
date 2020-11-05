@@ -99,7 +99,7 @@ def create_app():
     def tokenizer():
         if request.method == 'POST':
             payload = request.get_json()
-            tokens = args.tokenizer.tokenize(payload['line'])
+            tokens = args.tokenizer.tokenize(payload['code'])
             return jsonify(tokens=tokens)
 
     return app
