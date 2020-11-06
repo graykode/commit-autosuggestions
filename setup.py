@@ -13,10 +13,10 @@
 # limitations under the License.
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 project_name = "commit"
-version = os.environ.get('COMMIT_VERSION', '0.0.0')
+version = os.environ.get('COMMIT_VERSION', '0.0.1')
 
 if __name__ == "__main__":
 
@@ -41,9 +41,16 @@ if __name__ == "__main__":
         project_urls={
             "Source Code": "https://github.com/graykode/commit-autosuggestions",
         },
+        install_requires = [
+            'click>=7.1.2',
+            'gitpython>=3.1.7',
+            'whatthepatch>=1.0.0',
+            'packaging>=20.4',
+        ],
         entry_points={
             'console_scripts': [
-                'commit=commit.__main__:main',
+                'commit=commit.commit:cli'
             ],
-        }
+        },
+        packages=find_packages(),
     )
