@@ -37,8 +37,8 @@ from torch.utils.data.distributed import DistributedSampler
 from transformers import (AdamW, get_linear_schedule_with_warmup, RobertaConfig, RobertaTokenizer)
 
 import bleu
-from autocommit.model import Seq2Seq, RobertaModel
-from autocommit.utils import (convert_examples_to_features, Example)
+from commit.model import Seq2Seq, RobertaModel
+from commit.utils import (convert_examples_to_features, Example)
 
 MODEL_CLASSES = {'roberta': (RobertaConfig, RobertaModel, RobertaTokenizer)}
 

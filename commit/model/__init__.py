@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from autocommit.model.diff_roberta import RobertaModel
-from autocommit.model.model import Seq2Seq
+from commit.model.diff_roberta import RobertaModel
+from commit.model.model import Seq2Seq
 
 __all__ = [
     'RobertaModel',

@@ -27,7 +27,7 @@ def tokenizing(code):
     )
     return json.loads(res.text)["tokens"]
 
-def autocommit(diffs):
+def autosuggestions(diffs):
     commit_message = []
     for idx, example in enumerate(whatthepatch.parse_patch(diffs)):
         if not example.changes:
@@ -50,7 +50,9 @@ def autocommit(diffs):
                 data=json.dumps(data),
                 headers=args.headers
             )
-            commit_message.append(json.loads(res.text))
+            commit = json.loads(res.text)
+            commit.update({'path' : example.header.new_path})
+            commit_message.append(commit)
         else:
             data = {"idx": idx, "added": added, "deleted": deleted}
             res = requests.post(
@@ -58,7 +60,9 @@ def autocommit(diffs):
                 data=json.dumps(data),
                 headers=args.headers
             )
-            commit_message.append(json.loads(res.text))
+            commit = json.loads(res.text)
+            commit.update({'path': example.header.new_path})
+            commit_message.append(commit)
     return commit_message
 
 def main():
@@ -69,7 +73,7 @@ def main():
     staged_files = [f.strip() for f in staged_files]
     diffs = "\n".join(staged_files)
 
-    message = autocommit(diffs=diffs)
+    message = autosuggestions(diffs=diffs)
     print(message)
 
 if __name__ == '__main__':

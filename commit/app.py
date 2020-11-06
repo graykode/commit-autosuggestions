@@ -20,9 +20,9 @@ import torch.nn as nn
 from torch.utils.data import TensorDataset, DataLoader, SequentialSampler
 from transformers import (RobertaConfig, RobertaTokenizer)
 
-from autocommit.model import Seq2Seq
-from autocommit.utils import (Example, convert_examples_to_features)
-from autocommit.model.diff_roberta import RobertaModel
+from commit.model import Seq2Seq
+from commit.utils import (Example, convert_examples_to_features)
+from commit.model.diff_roberta import RobertaModel
 
 from flask import Flask, jsonify, request
 
