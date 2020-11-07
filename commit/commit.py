@@ -60,11 +60,15 @@ def commit_autosuggestions(diffs, endpoint):
         added, deleted = [], []
         for change in example.changes:
             if change.old == None and change.new != None:
-                added.extend(tokenizing(change.line, endpoint=endpoint))
+                added.append(change.line)
                 isadded = True
             elif change.old != None and change.new == None:
-                deleted.extend(tokenizing(change.line, endpoint=endpoint))
+                deleted.append(change.line)
                 isdeleted = True
+
+        # To speed up tokenizing request.
+        added = tokenizing(" ".join(added), endpoint=endpoint)
+        deleted = tokenizing(" ".join(deleted), endpoint=endpoint)
 
         if isadded and isdeleted and example.header.new_path:
             data = {"idx": idx, "added" : added, "deleted" : deleted}
