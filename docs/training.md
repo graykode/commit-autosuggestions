@@ -61,7 +61,7 @@ python train.py --do_train --do_eval --model_type roberta \
 ```
 
 ## How to train for your lint style?
-See the [Diff model](#Diff model) section above for the role of the code.
+See the [Diff model](https://github.com/graykode/commit-autosuggestions/blob/master/docs/training.md#diff-model) section above for the role of the code.
 
 #### 1. cloning repositories from github
 This code clones all repositories in [repositories.txt](https://github.com/graykode/commit-autosuggestions/blob/master/repositories.txt).
