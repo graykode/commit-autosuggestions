@@ -24,6 +24,7 @@ def get_diff_from_project():
     proc = subprocess.Popen(["git", "diff", "--cached"], stdout=subprocess.PIPE)
     staged_files = proc.stdout.readlines()
     staged_files = [f.decode("utf-8") for f in staged_files]
+    assert staged_files, "You have to update the file via `git add` to change not staged for commit."
     return staged_files
 
 def commit_message_parser(messages):
@@ -33,16 +34,23 @@ def commit_message_parser(messages):
         result.append(" ".join(commit["message"]))
     return result
 
-def tokenizing(code):
+def healthcheck(endpoint):
+    response = requests.get(
+        f"{endpoint}/",
+        headers={'Content-Type': 'application/json; charset=utf-8'}
+    )
+    assert response.status_code == 200, f"{endpoint} is not running."
+
+def tokenizing(code, endpoint):
     data = {"code": code }
     res = requests.post(
-        'http://127.0.0.1:5000/tokenizer',
+        f'{endpoint}/tokenizer',
         data=json.dumps(data),
         headers={'Content-Type': 'application/json; charset=utf-8'}
     )
     return json.loads(res.text)["tokens"]
 
-def commit_autosuggestions(diffs):
+def commit_autosuggestions(diffs, endpoint):
     commit_message = {}
     for idx, example in enumerate(whatthepatch.parse_patch(diffs)):
         if not example.changes:
@@ -52,16 +60,16 @@ def commit_autosuggestions(diffs):
         added, deleted = [], []
         for change in example.changes:
             if change.old == None and change.new != None:
-                added.extend(tokenizing(change.line))
+                added.extend(tokenizing(change.line, endpoint=endpoint))
                 isadded = True
             elif change.old != None and change.new == None:
-                deleted.extend(tokenizing(change.line))
+                deleted.extend(tokenizing(change.line, endpoint=endpoint))
                 isdeleted = True
 
         if isadded and isdeleted and example.header.new_path:
             data = {"idx": idx, "added" : added, "deleted" : deleted}
             res = requests.post(
-                'http://127.0.0.1:5000/diff',
+                f'{endpoint}/diff',
                 data=json.dumps(data),
                 headers={'Content-Type': 'application/json; charset=utf-8'}
             )
@@ -70,7 +78,7 @@ def commit_autosuggestions(diffs):
         else:
             data = {"idx": idx, "added": added, "deleted": deleted}
             res = requests.post(
-                'http://127.0.0.1:5000/added',
+                f'{endpoint}/added',
                 data=json.dumps(data),
                 headers={'Content-Type': 'application/json; charset=utf-8'}
             )
@@ -86,6 +94,8 @@ def commit(messages):
 
 @click.group(invoke_without_command=True)
 @click.pass_context
+@click.option('--profile', default='default', type=str,
+    help='unique name for managing each independent settings')
 @click.option('--file', '-f', type=click.File('r'),
     help='patch file containing git diff '
          '(e.g. file created by `git add` and `git diff --cached > test.diff`)')
@@ -93,13 +103,26 @@ def commit(messages):
     help='print suggested commit message more detail.')
 @click.option('--autocommit', '-a', is_flag=True,
     help='automatically commit without asking if you want to commit')
-def cli(ctx, file, verbose, autocommit):
+def cli(ctx, profile, file, verbose, autocommit):
     if not ctx.invoked_subcommand:
+        profile = profile.upper()
+        path = join(expanduser("~"), '.commit-autosuggestions.ini')
+        config = configparser.ConfigParser()
+        if not exists(path):
+            raise FileNotFoundError("The configuration file for commit-autosuggestions could not be found. "
+                                    "Enter the `commit configure --help` command.")
+        config.read(path)
+        if profile.upper() not in list(config.keys()):
+            raise KeyError(f"That profile({profile}) cannot be found in the configuration file. Check the {path}.")
+
+        endpoint = config[profile]['endpoint']
+        healthcheck(endpoint=endpoint)
+
         staged_files = file if file else get_diff_from_project()
         staged_files = [f.strip() for f in staged_files]
         diffs = "\n".join(staged_files)
 
-        result = commit_autosuggestions(diffs=diffs)
+        result = commit_autosuggestions(diffs=diffs, endpoint=endpoint)
         if verbose:
             click.echo(
                 json.dumps(result, indent=4, sort_keys=True) + "\n"
@@ -115,22 +138,26 @@ def cli(ctx, file, verbose, autocommit):
 @cli.command()
 @click.option('--profile', default='default', type=str,
     help='unique name for managing each independent settings')
-@click.option('--endpoint', default='http://127.0.0.1:5000/', type=str,
-    help='endpoint address accessible to the server (example:http://127.0.0.1:5000/)')
-
+@click.option('--endpoint', required=True, type=str,
+    help='endpoint address accessible to the server (example : http://127.0.0.1:5000/)')
 def configure(profile, endpoint):
+    profile = profile.upper()
     path = join(expanduser("~"), '.commit-autosuggestions.ini')
     config = configparser.ConfigParser()
     if exists(path):
         config.read(path)
-    if profile not in config:
+    if profile not in list(config.keys()):
         config[profile] = {}
     if endpoint:
         config[profile]['endpoint'] = endpoint
 
     click.echo(f"configure of commit-autosuggestions is setted up in {path}.")
+    with open(path, 'w') as configfile:
+        config.write(configfile)
     for key in config[profile]:
-        click.echo(click.style(key, fg='green') + config[profile][key])
+        click.echo("[" + click.style('username', fg='blue') + "] : " + profile)
+        click.echo("[" + click.style(key, fg='green') + "] : " + config[profile][key])
+        click.echo()
 
 if __name__ == '__main__':
     cli()
