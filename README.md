@@ -1,5 +1,4 @@
 # commit-autosuggestions
-
 <p align="center">
 <a href="https://travis-ci.com/github/graykode/commit-autosuggestions"><img alt="Build Status" src="https://travis-ci.com/graykode/commit-autosuggestions.svg?branch=master"></a>
 <a href="https://github.com/graykode/commit-autosuggestions/blob/master/LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
@@ -8,6 +7,8 @@
 </p>
 
 Have you ever hesitated to write a commit message? Now get a commit message from Artificial Intelligence!
+
+
 ![](images/demo.gif)
 
 ### Abstract
