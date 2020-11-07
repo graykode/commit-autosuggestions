@@ -1,4 +1,4 @@
-## How I trained model.
+## How the model was trained.
 We used the pre-trained weight provided by CodeBERT(Feng at al, 2020) as the initial weight.
 
 #### Added model
