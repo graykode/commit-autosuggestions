@@ -70,24 +70,28 @@ def commit_autosuggestions(diffs, endpoint):
         added = tokenizing(" ".join(added), endpoint=endpoint)
         deleted = tokenizing(" ".join(deleted), endpoint=endpoint)
 
-        if isadded and isdeleted and example.header.new_path:
-            data = {"idx": idx, "added" : added, "deleted" : deleted}
-            res = requests.post(
-                f'{endpoint}/diff',
-                data=json.dumps(data),
-                headers={'Content-Type': 'application/json; charset=utf-8'}
-            )
-            commit = json.loads(res.text)
-            commit_message[example.header.new_path] = commit
-        else:
-            data = {"idx": idx, "added": added, "deleted": deleted}
-            res = requests.post(
-                f'{endpoint}/added',
-                data=json.dumps(data),
-                headers={'Content-Type': 'application/json; charset=utf-8'}
-            )
-            commit = json.loads(res.text)
-            commit_message[example.header.new_path] = commit
+        _path = example.header.new_path \
+            if example.header.new_path \
+            else example.header.old_path
+        if _path:
+            if isadded and not isdeleted:
+                data = {"idx": idx, "added" : added, "deleted" : deleted}
+                res = requests.post(
+                    f'{endpoint}/added',
+                    data=json.dumps(data),
+                    headers={'Content-Type': 'application/json; charset=utf-8'}
+                )
+                commit = json.loads(res.text)
+                commit_message[_path] = commit
+            else:
+                data = {"idx": idx, "added": added, "deleted": deleted}
+                res = requests.post(
+                    f'{endpoint}/diff',
+                    data=json.dumps(data),
+                    headers={'Content-Type': 'application/json; charset=utf-8'}
+                )
+                commit = json.loads(res.text)
+                commit_message[_path] = commit
     return commit_message
 
 def commit(messages):
