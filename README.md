@@ -9,7 +9,7 @@
 Have you ever hesitated to write a commit message? Now get a commit message from Artificial Intelligence!
 
 
-![](images/demo.gif)
+<p align="center"><img src="images/demo.gif" /></p>
 
 ### Abstract
 [CodeBERT: A Pre-Trained Model for Programming and Natural Languages](https://arxiv.org/pdf/2002.08155.pdf) introduces a pre-trained model in a combination of Program Language and Natural Language(PL-NL). It also introduces the problem of converting code into natural language (Code Documentation Generation).
