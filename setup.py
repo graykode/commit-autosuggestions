@@ -16,7 +16,7 @@ import os
 from setuptools import setup, find_packages
 
 project_name = "commit"
-version = os.environ.get('COMMIT_VERSION', '0.0.1')
+version = os.environ.get('COMMIT_VERSION', '0.0.0')
 
 if __name__ == "__main__":
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         license="Apache License, Version 2.0",
         author="TaeHwan-Jung",
         author_email="nlkey2022@gmail.com",
-        description="",
+        description="A tool that AI automatically recommends commit messages.",
         url="https://github.com/graykode/commit-autosuggestions",
         # Platform, Requires
         python_requires=">=3.5",
