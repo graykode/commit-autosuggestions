@@ -43,7 +43,7 @@ index 1b1b82a..32a93f1 100644
 ```text
 Recommended Commit Message : Remove unused imports
 ```
-To solve this problem, use a new embedding called [`patch_type_embeddings`](https://github.com/graykode/commit-autosuggestions/blob/master/commit/model/diff_roberta.py#L40) that can distinguish added and deleted, just as the sample et al, 2019 (XLM) used language embeddeding. (1 for added, 2 for deleted.)
+To solve this problem, use a new embedding called [`patch_type_embeddings`](https://github.com/graykode/commit-autosuggestions/blob/master/commit/model/diff_roberta.py#L40) that can distinguish added and deleted, just as the XLM(Lample et al, 2019) used language embeddeding. (1 for added, 2 for deleted.)
 
 ### Language support
 | Language       | Added | Diff |
