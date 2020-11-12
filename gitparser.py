@@ -24,6 +24,15 @@ from multiprocessing.pool import Pool
 from transformers import RobertaTokenizer
 from pydriller import RepositoryMining
 
+language = {
+    'py' : ['.py'],
+    'js' : ['.js', '.ts'],
+    'go' : ['.go'],
+    'java' : ['.java'],
+    'ruby' : ['.rb'],
+    'php' : ['.php']
+}
+
 def message_cleaner(message):
     msg = message.split("\n")[0]
     msg = re.sub(r"(\(|)#([0-9])+(\)|)", "", msg)
@@ -34,7 +43,7 @@ def jobs(repo, args):
     repo_path = os.path.join(args.repos_dir, repo)
     if os.path.exists(repo_path):
         for commit in RepositoryMining(
-            repo_path, only_modifications_with_file_types=['.py']
+            repo_path, only_modifications_with_file_types=language[args.lang]
         ).traverse_commits():
             cleaned_message = message_cleaner(commit.msg)
             tokenized_message = args.tokenizer.tokenize(cleaned_message)
@@ -44,7 +53,7 @@ def jobs(repo, args):
             for mod in commit.modifications:
                 if not (mod.old_path and mod.new_path):
                     continue
-                if os.path.splitext(mod.new_path)[1] != '.py':
+                if os.path.splitext(mod.new_path)[1] not in language[args.lang]:
                     continue
                 if not mod.diff_parsed["added"]:
                     continue
@@ -120,6 +129,9 @@ if __name__ == "__main__":
     parser.add_argument("--repos_dir", type=str, required=True,
                         help="directory that all repositories had been downloaded.",)
     parser.add_argument("--output_dir", type=str, required=True,
+                        help="The output directory where the preprocessed data will be written.")
+    parser.add_argument("--lang", type=str, required=True,
+                        choices=['py', 'js', 'go', 'java', 'ruby', 'php'],
                         help="The output directory where the preprocessed data will be written.")
     parser.add_argument("--tokenizer_name", type=str,
                         default="microsoft/codebert-base", help="The name of tokenizer",)
