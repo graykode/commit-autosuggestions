@@ -146,7 +146,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--load_model_path", default='weight', type=str,
+    parser.add_argument("--load_model_path", type=str, required=True,
                         help="Path to trained model: Should contain the .bin files")
 
     parser.add_argument("--model_type", default='roberta', type=str,
