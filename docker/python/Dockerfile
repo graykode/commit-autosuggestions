@@ -20,4 +20,4 @@ RUN gdown https://drive.google.com/uc?id=${DIFF_MODEL} -O weight/python/diff/
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["python3", "app.py", "--load_model_path", "./weights/python/"]
+ENTRYPOINT ["python3", "app.py", "--load_model_path", "./weight/python/"]

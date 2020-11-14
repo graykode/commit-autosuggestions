@@ -65,10 +65,6 @@ class CitiesTestCase(unittest.TestCase):
             )
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            json.loads(response.text),
-            {'idx': 0, 'message': ['Test method .']}
-        )
 
     def test_added(self):
         response = requests.post(
@@ -83,10 +79,6 @@ class CitiesTestCase(unittest.TestCase):
             )
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            json.loads(response.text),
-            {'idx': 0, 'message': ['Fix typo']}
-        )
 
 
 def suite():
