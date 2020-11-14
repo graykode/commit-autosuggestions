@@ -46,10 +46,10 @@ Recommended Commit Message : Remove unused imports
 To solve this problem, use a new embedding called [`patch_type_embeddings`](https://github.com/graykode/commit-autosuggestions/blob/master/commit/model/diff_roberta.py#L40) that can distinguish added and deleted, just as the sample et al, 2019 (XLM) used language embeddeding. (1 for added, 2 for deleted.)
 
 ### Language support
-| Language       | Added | Diff |  Data(Diff) | Weights |
+| Language       | Added | Diff |  Data(Only Diff) | Weights |
 | :------------- | :---: | :---:| :---: | :---:|
-| Python         | ✅    | ✅   | [link](https://drive.google.com/drive/folders/1_8lQmzTH95Nc-4MKd1RP3x4BVc8tBA6W?usp=sharing) |  [link](https://drive.google.com/drive/folders/1OwM7_FiLiwVJAhAanBPWtPw3Hz3Dszbh?usp=sharing)  |
-| JavaScript     | ⬜    | ⬜   | ⬜ |  ⬜  |
+| Python         | ✅    | ✅   | [423k](https://drive.google.com/drive/folders/1_8lQmzTH95Nc-4MKd1RP3x4BVc8tBA6W?usp=sharing) |  [Link](https://drive.google.com/drive/folders/1OwM7_FiLiwVJAhAanBPWtPw3Hz3Dszbh?usp=sharing)  |
+| JavaScript     | ✅    | ✅   | [514k](https://drive.google.com/drive/folders/1-Hv0VZWSAGqs-ewNT6NhLKEqDH2oa1az?usp=sharing) |  [Link](https://drive.google.com/drive/folders/1Jw8vXfxUXsfElga_Gi6e7Uhfc_HlmOuD?usp=sharing)  |
 | Go             | ⬜    | ⬜   | ⬜ |  ⬜  |
 | JAVA           | ⬜    | ⬜   | ⬜ |  ⬜  |
 | Ruby           | ⬜    | ⬜   | ⬜ |  ⬜  |
@@ -57,7 +57,7 @@ To solve this problem, use a new embedding called [`patch_type_embeddings`](http
 * ✅ — Supported
 * ⬜ - N/A ️
 
-We plan to slowly conquer languages that are not currently supported. However, I also need to use expensive GPU instances of AWS or GCP to train about the above languages. Please do a simple sponsor for this!
+We plan to slowly conquer languages that are not currently supported. However, I also need to use expensive GPU instances of AWS or GCP to train about the above languages. Please do a simple sponsor for this! Add data is [CodeSearchNet dataset](https://drive.google.com/uc?id=1rd2Tc6oUWBo7JouwexW3ksQ0PaOhUr6h).
 
 ### Quick Start
 To run this project, you need a flask-based inference server (GPU) and a client (commit module). If you don't have a GPU, don't worry, you can use it through Google Colab.
