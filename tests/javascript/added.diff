@@ -1,0 +1,13 @@
+diff --git a/function.js b/function.js
+new file mode 100644
+index 0000000..ba89d9a
+--- /dev/null
++++ b/function.js
+@@ -0,0 +1,6 @@
++function getIntoAnArgument() {
++    var args = arguments.slice();
++    args.forEach(function(arg) {
++        console.log(arg);
++    });
++}
+\ No newline at end of file
