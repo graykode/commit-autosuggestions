@@ -8,11 +8,10 @@
 
 Have you ever hesitated to write a commit message? Now get a commit message from Artificial Intelligence!
 
-##### Python
-<p align="center"><img src="images/python.gif" /></p>
-
-##### Javascript
-<p align="center"><img src="images/javascript.gif" /></p>
+<div align="center">
+<span align="left"><img src="https://raw.githubusercontent.com/graykode/commit-autosuggestions/master/images/python.gif" weight="380px" height="270px" /></span>
+  <span align="right"><img src="https://raw.githubusercontent.com/graykode/commit-autosuggestions/master/images/javascript.gif" weight="380px" height="270px" /></span>
+</div>
 
 ### Abstract
 [CodeBERT: A Pre-Trained Model for Programming and Natural Languages](https://arxiv.org/pdf/2002.08155.pdf) introduces a pre-trained model in a combination of Program Language and Natural Language(PL-NL). It also introduces the problem of converting code into natural language (Code Documentation Generation).
