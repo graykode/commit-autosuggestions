@@ -46,20 +46,18 @@ Recommended Commit Message : Remove unused imports
 To solve this problem, use a new embedding called [`patch_type_embeddings`](https://github.com/graykode/commit-autosuggestions/blob/master/commit/model/diff_roberta.py#L40) that can distinguish added and deleted, just as the XLM(Lample et al, 2019) used language embeddeding. (1 for added, 2 for deleted.)
 
 ### Language support
-| Language       | Added | Diff |
-| :------------- | :---: | :---:|
-| Python         | ✅    | ✅    |
-| JavaScript     | ⬜    | ⬜    |
-| Go             | ⬜    | ⬜    |
-| JAVA           | ⬜    | ⬜    |
-| Ruby           | ⬜    | ⬜    |
-| PHP            | ⬜    | ⬜    |
+| Language       | Added | Diff |  Data(Only Diff) | Weights |
+| :------------- | :---: | :---:| :---: | :---:|
+| Python         | ✅    | ✅   | [423k](https://drive.google.com/drive/folders/1_8lQmzTH95Nc-4MKd1RP3x4BVc8tBA6W?usp=sharing) |  [Link](https://drive.google.com/drive/folders/1OwM7_FiLiwVJAhAanBPWtPw3Hz3Dszbh?usp=sharing)  |
+| JavaScript     | ✅    | ✅   | [514k](https://drive.google.com/drive/folders/1-Hv0VZWSAGqs-ewNT6NhLKEqDH2oa1az?usp=sharing) |  [Link](https://drive.google.com/drive/folders/1Jw8vXfxUXsfElga_Gi6e7Uhfc_HlmOuD?usp=sharing)  |
+| Go             | ⬜    | ⬜   | ⬜ |  ⬜  |
+| JAVA           | ⬜    | ⬜   | ⬜ |  ⬜  |
+| Ruby           | ⬜    | ⬜   | ⬜ |  ⬜  |
+| PHP            | ⬜    | ⬜   | ⬜ |  ⬜  |
 * ✅ — Supported
-* 🔶 — Partial support
-* 🚧 — Under development
 * ⬜ - N/A ️
 
-We plan to slowly conquer languages that are not currently supported. However, I also need to use expensive GPU instances of AWS or GCP to train about the above languages. Please do a simple sponsor for this!
+We plan to slowly conquer languages that are not currently supported. However, I also need to use expensive GPU instances of AWS or GCP to train about the above languages. Please do a simple sponsor for this! Add data is [CodeSearchNet dataset](https://drive.google.com/uc?id=1rd2Tc6oUWBo7JouwexW3ksQ0PaOhUr6h).
 
 ### Quick Start
 To run this project, you need a flask-based inference server (GPU) and a client (commit module). If you don't have a GPU, don't worry, you can use it through Google Colab.
@@ -68,9 +66,18 @@ To run this project, you need a flask-based inference server (GPU) and a client 
 Prepare Docker and Nvidia-docker before running the server.
 
 ##### 1-a. If you have GPU machine.
-Serve flask server with Nvidia Docker
+Serve flask server with Nvidia Docker. Check the docker tag for programming language in [here](https://hub.docker.com/repository/registry-1.docker.io/graykode/commit-autosuggestions/tags).
+| Language       | Tag   |
+| :------------- | :---: |
+| Python         | py    |
+| JavaScript     | js    |
+| Go             | go    |
+| JAVA           | java  |
+| Ruby           | ruby  |
+| PHP            | php   |
+
 ```shell script
-$ docker run -it --gpus 0 -p 5000:5000 commit-autosuggestions:0.1-gpu
+$ docker run -it -d --gpus 0 -p 5000:5000 graykode/commit-autosuggestions:{language}
 ```
 
 ##### 1-b. If you don't have GPU machine.

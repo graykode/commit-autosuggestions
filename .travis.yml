@@ -2,12 +2,15 @@ language: python
 python:
   - "3.6"
 
+env:
+  - LANGUAGE="py"
+
 services:
   - docker
 
 before_install:
-  - docker pull graykode/commit-autosuggestions
-  - docker run -it -d -p 5000:5000 --restart always graykode/commit-autosuggestions
+  - docker pull graykode/commit-autosuggestions:${LANGUAGE}
+  - docker run -it -d -p 5000:5000 --restart always graykode/commit-autosuggestions:${LANGUAGE}
 
 # command to install dependencies
 install:

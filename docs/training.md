@@ -104,6 +104,8 @@ optional arguments:
                         The maximum total target sequence length after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.
 ```
 
+> If `UnicodeDecodeError` occurs while using gitparser.py, you must use the [GitPython](https://github.com/gitpython-developers/GitPython) package at least [this commit](https://github.com/gitpython-developers/GitPython/commit/bfbd5ece215dea328c3c6c4cba31225caa66ae9a).
+
 #### 3. Training Added model(Optional for Python Language).
 Python has learned the Added model. So, if you only want to make a Diff model for the Python language, step 3 can be ignored. However, for other languages (JavaScript, GO, Ruby, PHP and JAVA), [Code2NL training](https://github.com/microsoft/CodeBERT#fine-tune-1) is required to use as the initial weight of the model to be used in step 4.
 

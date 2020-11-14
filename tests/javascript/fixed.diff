@@ -1,0 +1,14 @@
+diff --git a/function.js b/function.js
+index ba89d9a..d440734 100644
+--- a/function.js
++++ b/function.js
+@@ -1,6 +1,3 @@
+-function getIntoAnArgument() {
+-    var args = arguments.slice();
+-    args.forEach(function(arg) {
+-        console.log(arg);
+-    });
++function getIntoAnArgument(...args) {
++    args.forEach(arg => console.log(arg));
+ }
+\ No newline at end of file

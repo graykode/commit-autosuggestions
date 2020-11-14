@@ -10,14 +10,14 @@ ARG ADDED_MODEL="1YrkwfM-0VBCJaa9NYaXUQPODdGPsmQY4"
 ARG DIFF_MODEL="1--gcVVix92_Fp75A-mWH0pJS0ahlni5m"
 
 RUN git clone https://github.com/graykode/commit-autosuggestions.git /app/commit-autosuggestions \
-    && cd /app/commit-autosuggestions && python3 setup.py install
+    && cd /app/commit-autosuggestions
 
 WORKDIR /app/commit-autosuggestions
 
 RUN pip3 install ${PYTORCH_WHEEL} gdown
-RUN gdown https://drive.google.com/uc?id=${ADDED_MODEL} -O weight/added/
-RUN gdown https://drive.google.com/uc?id=${DIFF_MODEL} -O weight/diff/
+RUN gdown https://drive.google.com/uc?id=${ADDED_MODEL} -O weight/python/added/
+RUN gdown https://drive.google.com/uc?id=${DIFF_MODEL} -O weight/python/diff/
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["python3", "app.py"]
+ENTRYPOINT ["python3", "app.py", "--load_model_path", "./weight/python/"]
