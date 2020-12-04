@@ -18,10 +18,13 @@ Have you ever hesitated to write a commit message? Now get a commit message from
 ```text
 diff --git a/test.py b/test.py
 new file mode 100644
-index 0000000..1b1b82a
+index 0000000..d13f441
 --- /dev/null
 +++ b/test.py
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,6 @@
++
++import torch
++import argparse
 +
 +def add(a, b):
 +    return a + b
@@ -32,13 +35,14 @@ Recommended Commit Message : Add two arguments .
 We can use CodeBERT to create a model that generates a commit message when code is added. However, most code changes are not made only by add of the code, and some parts of the code are deleted.
 ```text
 diff --git a/test.py b/test.py
-index 1b1b82a..32a93f1 100644
+index d13f441..1b1b82a 100644
 --- a/test.py
 +++ b/test.py
-@@ -1,3 +1,5 @@
-+import torch
-+import arguments
- 
+@@ -1,6 +1,3 @@
+
+-import torch
+-import argparse
+-
  def add(a, b):
      return a + b
 ```
