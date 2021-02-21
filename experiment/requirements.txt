@@ -1,0 +1,7 @@
+gitpython
+jsonlines
+tqdm
+pydriller
+transformers==3.4.0
+wandb
+knockknock
