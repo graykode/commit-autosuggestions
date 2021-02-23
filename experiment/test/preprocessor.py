@@ -57,15 +57,12 @@ def main(args):
                     )
             else:
                 for line in lines:
-                    added += tokenize_code(PARSER, line)
-
-                added = ' '.join(added).replace('\n', ' ')
-                added = ' '.join([v for v in added.strip().split() if v != '<nl>'])
+                    added += [v for v in tokenize_code(PARSER, line) if v != '<nl>']
 
                 with jsonlines.open(f"all/{name}.jsonl", mode="a") as writer:
                     writer.write(
                         {
-                            "commit_tokens": commit_tokens,
+                            "docstring_tokens": commit_tokens,
                             "code_tokens": added,
                         }
                     )
