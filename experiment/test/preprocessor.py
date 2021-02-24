@@ -19,8 +19,8 @@ def main(args):
         with open(f_msg) as f:
             msg = f.readlines()
 
-        for i, line in enumerate(diff):
-            line = line.strip()
+        for i, original_line in enumerate(diff):
+            line = original_line.strip()
             added, deleted = [], []
 
             cleaned_message = message_cleaner(msg[i])
@@ -33,6 +33,14 @@ def main(args):
             if line.split('<nl>')[0].split()[-1] != "java" or line.split('<nl>')[1].split()[-1] != "java":
                 continue
             lines = [l.strip() for l in line.split('<nl>')[2:]]
+
+            if args.nngen:
+                with open(f"nngen/{name}.diff", mode="a") as f:
+                    f.write(original_line)
+                with open(f"nngen/{name}.msg", mode="a") as f:
+                    f.write(msg[i])
+                continue
+
             if args.adddel:
                 for line in lines:
                     if len(line) > 0 and line[0] == "+":
@@ -70,6 +78,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
     parser.add_argument("--adddel", action='store_true')
+    parser.add_argument("--nngen", action='store_true')
     parser.add_argument("--tree_sitter", type=str, required=True,
                         help="The path of py-tree-sitter-languages.so (ex, /src/build/py-tree-sitter-languages.so)")
     args = parser.parse_args()
