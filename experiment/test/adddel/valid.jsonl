@@ -1,0 +1,450 @@
+{"commit_tokens": ["Fix", "broken", "build", "due", "to", "@", "RemotableViewMethod"], "add_tokens": "@ android . view . RemotableViewMethod", "del_tokens": "@ RemotableViewMethod"}
+{"commit_tokens": ["Added", "lightweight", "exception", "logging", "to", "AsyncQueryHandler", "."], "add_tokens": "Log . d ( TAG , e . toString ( ) ) ;", "del_tokens": ""}
+{"commit_tokens": ["Adjust", "performance", "expectations"], "add_tokens": "doInspectionTest ( new GoUnusedFunctionInspection ( ) , TimeUnit . SECONDS . toMillis ( 30 ) ) ;", "del_tokens": "doInspectionTest ( new GoUnusedFunctionInspection ( ) , TimeUnit . MINUTES . toMillis ( 3 ) ) ;"}
+{"commit_tokens": ["Slide", "the", "whole", "window", "(", "also", "fixes", "overlay", "AB", "issues", ")", "."], "add_tokens": "", "del_tokens": "setSlidingActionBarEnabled ( false ) ;"}
+{"commit_tokens": ["Add", "the", "checkstyle", "rule", "FinalClass"], "add_tokens": "private static final class ApplicationMasterPrivateAccess {", "del_tokens": "private static class ApplicationMasterPrivateAccess {"}
+{"commit_tokens": ["Add", "precondition", "to", "throw", "more", "informative", "exception", "when", "calling", "request", "(", ")", "before", "start", "(", ")", "has", "been", "called", "."], "add_tokens": "Preconditions . checkState ( stream ! = null , \" Not started \" ) ;", "del_tokens": ""}
+{"commit_tokens": ["Hide", "ObjectGraph", "s", "constructor"], "add_tokens": "ObjectGraph ( ) { }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "failing", "test", "case"], "add_tokens": "( ( StoreDirect ) e ) . init ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["decrease", "default", "cache", "size", "to", "prevent", "OOEMs"], "add_tokens": "int DEFAULT_CACHE_SIZE = 2048 ;", "del_tokens": "int DEFAULT_CACHE_SIZE = 1024 * 32 ;"}
+{"commit_tokens": ["remove", "duplicate", "setter"], "add_tokens": "", "del_tokens": "public void setRemoteName ( @ Nullable String remoteName ) { myRemoteName = remoteName ; }"}
+{"commit_tokens": ["Don", "t", "exit", "lock", "task", "on", "sleep"], "add_tokens": "", "del_tokens": "setLockTaskModeLocked ( null ) ;"}
+{"commit_tokens": ["fix", "test", "data"], "add_tokens": "while ( x ) < caret >", "del_tokens": "while ( x ) < caret >"}
+{"commit_tokens": ["Made", "field", "private"], "add_tokens": "private BsonDocumentBufferSerializer serializer =", "del_tokens": "BsonDocumentBufferSerializer serializer ="}
+{"commit_tokens": ["ignore", "eclipse", "project", "files"], "add_tokens": "", "del_tokens": "/ / MappedClass"}
+{"commit_tokens": ["HHH", "-", "5376", "Tests", "contain", "invalid", "SQL"], "add_tokens": "@ Override public boolean supportsNotNullUnique ( ) { return false ; }", "del_tokens": ""}
+{"commit_tokens": ["make", "mesh", "static", "by", "default"], "add_tokens": "setStatic ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Help", "topic", "specified", "."], "add_tokens": "return \" preferences . updates \" ;", "del_tokens": "return \" preferences . versionUpdates \" ; / / TODO [ pti ] : request Help Topic"}
+{"commit_tokens": ["Remove", "TODO"], "add_tokens": "", "del_tokens": "/ / TODO : purge expired realtime data"}
+{"commit_tokens": ["For", "listObjects", "wit", "no", "prefix", "insert", "a", "/", "as", "the", "path", "(", "HTTP", "compliance", ")"], "add_tokens": "} else { uri + = \" / \" ;", "del_tokens": ""}
+{"commit_tokens": ["Dismiss", "overflow", "popup", "when", "overflow", "button", "is", "detached", "."], "add_tokens": "if ( mOverflowPopup ! = null ) mOverflowPopup . dismiss ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "Google", "-", "internal", "memory", "consumption", "tests", "for", "all", "top", "-", "level", "Multiset", "implementations", "."], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Explicitly", "request", "the", "focus", "in", "the", "call", "panel", "in", "single", "window", "mode", "."], "add_tokens": "callPanel . requestFocus ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["removed", "unused", "import"], "add_tokens": "", "del_tokens": "import java . util . regex . Pattern ;"}
+{"commit_tokens": ["Updated", "todo"], "add_tokens": "* - compression", "del_tokens": ""}
+{"commit_tokens": ["Add", "a", "class", "PlainSaslServer", "that", "implements", "the", "SaslServer", "interface", "-", "-", "add", "newline", "at", "end", "of", "file"], "add_tokens": "}", "del_tokens": "}"}
+{"commit_tokens": ["removed", "whitespace"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["removed", "debug", "printing"], "add_tokens": "", "del_tokens": "System . err . println ( this ) ;"}
+{"commit_tokens": ["enable", "cleaner", "hack", "so", "it", "consumes", "less", "disk", "space"], "add_tokens": "maker . fileMmapEnableIfSupported ( ) . fileMmapCleanerHackEnable ( ) ;", "del_tokens": "maker . fileMmapEnableIfSupported ( ) ;"}
+{"commit_tokens": ["Remove", "unnecessary", "isLeaderMode", "(", ")", "from", "MasterBase", ".", "java"], "add_tokens": "", "del_tokens": "protected boolean isLeaderMode ( ) { return mIsLeader ; }"}
+{"commit_tokens": ["Fixed", "a", "bug", "where", "menu", "items", "from", "all", "fragments", "in", "pager", "would", "be", "added", "to", "menu"], "add_tokens": "if ( ! isCurrentTaskListFragment ( ) ) return ;", "del_tokens": ""}
+{"commit_tokens": ["update", "generated", "Order", "class"], "add_tokens": "private transient Long customer__resolvedKey ;", "del_tokens": "private Long customer__resolvedKey ;"}
+{"commit_tokens": ["Deprecate", "getAssociatedNode"], "add_tokens": "/ * * @ deprecated This method will be removed * / @ Deprecated", "del_tokens": ""}
+{"commit_tokens": ["Fix", "JavaDoc", "."], "add_tokens": "* get ClusterManager", "del_tokens": "* get Cluster DeltaManager"}
+{"commit_tokens": ["added", "system", "exit", "at", "the", "end", "of", "main", "call", "to", "avoid", "hanging", "problem", "in", "grails", "generate", "-", "all"], "add_tokens": "System . exit ( 0 ) ;", "del_tokens": ""}
+{"commit_tokens": ["Peek", "the", "left", "overlay", "drawer", "."], "add_tokens": "mDrawer . peekDrawer ( 1000 , 0 ) ;", "del_tokens": ""}
+{"commit_tokens": ["Remove", "hangover", "printStackTrace", "from", "closing", "UdpChannelTransports", "."], "add_tokens": "", "del_tokens": "ex . printStackTrace ( ) ;"}
+{"commit_tokens": ["changed", "the", "inner", "class", "to", "static"], "add_tokens": "private static class ClientProxyFuture {", "del_tokens": "private class ClientProxyFuture {"}
+{"commit_tokens": ["Fixed", "EmptyValidator", "allowing", "whitespace"], "add_tokens": "return TextUtils . getTrimmedLength ( et . getText ( ) ) > 0 ;", "del_tokens": "return ! TextUtils . isEmpty ( et . getText ( ) ) ;"}
+{"commit_tokens": ["Set", "INHERIT_LOG4J", "default", "to", "false", "."], "add_tokens": "public static boolean INHERIT_LOG4J = false ;", "del_tokens": "public static boolean INHERIT_LOG4J = true ;"}
+{"commit_tokens": ["Removed", "system", ".", "out"], "add_tokens": "", "del_tokens": "System . out . println ( \" Found highest log version \" + highest ) ;"}
+{"commit_tokens": ["help", "id", "(", "IDEA", "-", "137826", ")"], "add_tokens": "return \" Templates Dialog \" ;", "del_tokens": "return null ;"}
+{"commit_tokens": ["Set", "unsubscribed", "true"], "add_tokens": "unsubscribed . set ( true ) ;", "del_tokens": "unsubscribed . set ( false ) ;"}
+{"commit_tokens": ["Add", "solution", "to", "problem", "78"], "add_tokens": "public boolean compare ( Integer n1 , Integer n2 ) { return n1 = = n2 ; }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "typo"], "add_tokens": "ttsRequests = 0 ;", "del_tokens": "ttsRequests = = 0 ;"}
+{"commit_tokens": ["Enabling", "show", "implementations", "in", "plain", "html", "and", "other", "files", "that", "do", "not", "contain", "java", "code", "."], "add_tokens": "return true ;", "del_tokens": "return file . canContainJavaCode ( ) ;"}
+{"commit_tokens": ["Ignore", "MoreFilesIntegrationTest", "."], "add_tokens": "@ org . junit . Ignore", "del_tokens": ""}
+{"commit_tokens": ["Showing", "the", "dialog"], "add_tokens": "builder . show ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["corrected", "check", "for", "duplicated", "classes"], "add_tokens": "", "del_tokens": "break ;"}
+{"commit_tokens": ["GraphServiceBeanImpl", "always", "returns", "the", "same", "graph", "even", "with", "routerId"], "add_tokens": "return graph ;", "del_tokens": "/ / TODO Auto - generated method stub return null ;"}
+{"commit_tokens": ["Added", "call", "to", "HystrixPlugins", ".", "reset", "(", ")", "in", "HystrixCommandTestWithCustomConcurrencyStrategy"], "add_tokens": "HystrixPlugins . reset ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["ignore", "failing", "test"], "add_tokens": "@ Override public void large_record_larger ( ) { / / TODO ignored test }", "del_tokens": ""}
+{"commit_tokens": ["remove", "unused", "import"], "add_tokens": "", "del_tokens": "import java . io . BufferedWriter ;"}
+{"commit_tokens": ["Cannot", "edit", "watch", "in", "Flex", "debugger", "."], "add_tokens": "doSetText ( text ) ;", "del_tokens": "doSetText ( null ) ;"}
+{"commit_tokens": ["Include", "6", ".", "0", ".", "x", "parameter", "processing", "fix", "in", "trunk", "."], "add_tokens": "return ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "tap", "detection", "after", "a", "long", "press"], "add_tokens": "mHasPerformedLongPress = false ;", "del_tokens": ""}
+{"commit_tokens": ["DO", "NOT", "MERGE", "-", "-", "copy", "on", "tapping", "outside", "of", "selected", "text", "in", "gmail"], "add_tokens": "if ( mMapTrackballToArrowKeys ) { / / gmail copySelection ( ) ; }", "del_tokens": ""}
+{"commit_tokens": ["stopping", "the", "preview", "before", "unlocking", "reportedly", "helps", "with", "video", "corruption", ".", ".", "."], "add_tokens": "camera . stopPreview ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Delete", "duplicate", "SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION", "flag"], "add_tokens": "", "del_tokens": "| View . SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION"}
+{"commit_tokens": ["Removed", "a", "System", ".", "out"], "add_tokens": "", "del_tokens": "System . out . println ( \" released some locks for \" + tx ) ;"}
+{"commit_tokens": ["Fix", "uireader", "-", "ontranslate"], "add_tokens": "reader . setTranslateHandler ( handler ) ;", "del_tokens": ""}
+{"commit_tokens": ["BubbleFlowDraggable", "handles", "the", "onDestroyBubble", "(", ")", "."], "add_tokens": "remove ( getCenterIndex ( ) , true ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "compile", "error", "for", "the", "spelling", "pull", "request", "."], "add_tokens": "UpdateFrequency = updateFrequency ;", "del_tokens": "UpdateFrequancy = updateFrequency ;"}
+{"commit_tokens": ["fixed", "issue", "with", "detecting", "html", "tag", "state"], "add_tokens": "return state = = 0 ;", "del_tokens": "return state = = __XmlLexer . TAG | | state = = __XmlLexer . END_TAG ;"}
+{"commit_tokens": ["Eliminate", "an", "unnecessary", "initializer"], "add_tokens": "private IDevice device ;", "del_tokens": "private IDevice device = null ;"}
+{"commit_tokens": ["Hiding", "DrawerLayout", "does", "not", "fire", "correct", "accessibility", "event", "."], "add_tokens": "getRootView ( ) . sendAccessibilityEvent ( AccessibilityEvent . TYPE_WINDOW_STATE_CHANGED ) ;", "del_tokens": "sendAccessibilityEvent ( AccessibilityEvent . TYPE_WINDOW_STATE_CHANGED ) ;"}
+{"commit_tokens": ["missing", "import"], "add_tokens": "import org . geometerplus . fbreader . bookmodel . BookModel ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "URI", "import"], "add_tokens": "import android . net . Uri ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "ExchangeNode", "to", "graphviz", "printer"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Remove", "unused", "enum", "value"], "add_tokens": "MODIFY", "del_tokens": "MODIFY , UNKNOWN"}
+{"commit_tokens": ["Fix", "year", "picker", "initial", "range"], "add_tokens": "mYearPickerView . setRange ( mMinDate , mMaxDate ) ;", "del_tokens": ""}
+{"commit_tokens": ["avoid", "massive", "logging"], "add_tokens": "LOG . debug ( e ) ;", "del_tokens": "LOG . info ( e ) ;"}
+{"commit_tokens": ["Fix", "bug", "where", "SslHandler", "returned", "wrong", "value", "for", "getCloseNotifyTimeoutMillis", "(", ")"], "add_tokens": "return closeNotifyTimeoutMillis ;", "del_tokens": "return handshakeTimeoutMillis ;"}
+{"commit_tokens": ["Remove", "unnecessary", "@", "SuppressWarnings", "."], "add_tokens": "", "del_tokens": "@ SuppressWarnings ( \" unchecked \" ) / / ( Iterator < T > ) ImmutableList . of ( )"}
+{"commit_tokens": ["made", "class", "final"], "add_tokens": "public static final class Builder {", "del_tokens": "public static class Builder {"}
+{"commit_tokens": ["Use", "the", "write", "listener", "to", "decide", "between", "a", "blocking", "and", "a", "non", "blocking", "flush", "on", "close", "."], "add_tokens": "flushInternal ( ( listener = = null ) , false ) ;", "del_tokens": "flushInternal ( false , false ) ;"}
+{"commit_tokens": ["Fix", "sync", "tests", "failure", "."], "add_tokens": "return syncs ;", "del_tokens": "return new ArrayList < SyncInfo > ( syncs ) ;"}
+{"commit_tokens": ["Removing", "dead", "store", ";", "it", "was", "likely", "a", "relict", "of", "debuging", "code", "."], "add_tokens": "", "del_tokens": "Message deferMsg = new Message ( ) ;"}
+{"commit_tokens": ["added", "some", "logging", "to", "NodeEnvironmentTests", ".", "testDeleteSafe"], "add_tokens": "logger . error ( \" unexpected error \" , t ) ;", "del_tokens": ""}
+{"commit_tokens": ["fixed", "wrong", "UnreachedBarColor", "#", "25"], "add_tokens": "mUnreachedBarPaint . setColor ( mUnreachedBarColor ) ;", "del_tokens": "mUnreachedBarPaint . setColor ( mReachedBarColor ) ;"}
+{"commit_tokens": ["LPS", "-", "52171", "NewEnvTestRule", ".", "RunInNewClassLoaderStatement", "should", "reset", "MethodCache", "after", "run", "to", "release", "references", "to", "the", "new", "classloader", "so", "that", "it", "can", "be", "gced", "properly"], "add_tokens": "MethodCache . reset ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Adds", "FlakyTest", "annotation", "to", "failing", "acceptance", "test"], "add_tokens": "@ FlakyTest ( tolerance = 5 )", "del_tokens": ""}
+{"commit_tokens": ["Check", "interface", "before", "invoking", "scheduleLowMemory"], "add_tokens": "data . enforceInterface ( IApplicationThread . descriptor ) ;", "del_tokens": ""}
+{"commit_tokens": ["id", "-", "based", "equals", "&", "hashCode", "generation"], "add_tokens": "return PsiElement . EMPTY_ARRAY ;", "del_tokens": "return null ;"}
+{"commit_tokens": ["Fix", "Issue", "#", "550"], "add_tokens": "color = new Color ( 153 , 153 , 153 ) ; / / Default gray of nodes", "del_tokens": "color = Color . BLACK ;"}
+{"commit_tokens": ["add", "missing", "method", "to", "mbean"], "add_tokens": "public List < InetAddress > getLiveNaturalEndpoints ( String key ) ;", "del_tokens": ""}
+{"commit_tokens": ["Remove", "outdated", "ES", "config"], "add_tokens": "", "del_tokens": "private ElasticSearchConfiguration elasticSearchProperties ; @ Getter @ Setter @ JsonProperty @ NotNull"}
+{"commit_tokens": ["Fix", "cleaning", "scan", "result", "cache"], "add_tokens": "doBooleanCommand ( \" BSS_FLUSH 0 \" ) ;", "del_tokens": "doBooleanCommand ( \" BSS_FLUSH \" ) ;"}
+{"commit_tokens": ["When", "configuring", "mmapfs", "it", "is", "not", "used", "since", "0", ".", "19", ".", "7", "closes", "#", "2253", "."], "add_tokens": "public class XMMapFSDirectory extends MMapDirectory {", "del_tokens": "public class XMMapFSDirectory extends NIOFSDirectory {"}
+{"commit_tokens": ["Revert", "LPS", "-", "54998", "SF"], "add_tokens": "catch ( MalformedURLException e ) {", "del_tokens": "catch ( MalformedURLException murle ) {"}
+{"commit_tokens": ["Fix", "for", "declaration", "resolve"], "add_tokens": "return descriptorToDeclarations . get ( descriptor . getOriginal ( ) ) ;", "del_tokens": "return descriptorToDeclarations . get ( descriptor ) ;"}
+{"commit_tokens": ["updated", "key", "types", "."], "add_tokens": "extends Reducer < Text , DoubleWritable , Text , DoubleWritable >", "del_tokens": "extends Reducer < IntWritable , DoubleWritable , IntWritable , DoubleWritable >"}
+{"commit_tokens": ["Fix", "a", "typo", "in", "a", "javadoc", "comment"], "add_tokens": "* Transmit an infrared pattern", "del_tokens": "* Tansmit and infrared pattern"}
+{"commit_tokens": ["added", "a", "private", "constuctor", "for", "ticket", "#", "TACHYON", "-", "1243"], "add_tokens": "private Version ( ) { }", "del_tokens": ""}
+{"commit_tokens": ["Reading", "/", "writing", "the", "mappings", "-", "-", "-", "tested", "version", "."], "add_tokens": "import org . jetbrains . ether . dependencyView . Mappings ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "case", "in", "switch", "."], "add_tokens": "case IGNORE :", "del_tokens": ""}
+{"commit_tokens": ["Removed", "superfluous", "@", "SuppressWarnings", "(", "unused", ")", "from", "PutAllPartitionAwareOperationFactory"], "add_tokens": "", "del_tokens": "@ SuppressWarnings ( \" unused \" )"}
+{"commit_tokens": ["Fix", "typo", "in", "exception", "."], "add_tokens": "throw new UnsupportedOperationException ( \" Received an unknown message type . \" ) ;", "del_tokens": "throw new UnsupportedOperationException ( \" Received an uknown message type . \" ) ;"}
+{"commit_tokens": ["Assert", "statement", "formatting"], "add_tokens": "public final AbstractTreeNode getParentElement ( ) {", "del_tokens": "public final Object getParentElement ( ) {"}
+{"commit_tokens": ["texture", "wrap", "enum"], "add_tokens": "Repeat", "del_tokens": "Wrap"}
+{"commit_tokens": ["do", "not", "hang", "tests", "on", "assertion"], "add_tokens": "paused ( suspendContext ) ;", "del_tokens": ""}
+{"commit_tokens": ["Rename", "carrier", "config", "constant", "."], "add_tokens": "\" allow_non_emergency_calls_in_ecm_bool \" ;", "del_tokens": "\" allowNonEmergencyCallsInEcm \" ;"}
+{"commit_tokens": ["added", "decent", "message", "when", "cusom", "matcher", "is", "used"], "add_tokens": "public class ArgumentMatcherTest extends TestBase {", "del_tokens": "public class ArgumentMatcherTest {"}
+{"commit_tokens": ["Fix", "NPE", "if", "there", "is", "no", "accelerometer", "."], "add_tokens": "if ( mSensorEventListener ! = null ) { mSensorEventListener . setAllow180Rotation ( allowed ) ; }", "del_tokens": "mSensorEventListener . setAllow180Rotation ( allowed ) ;"}
+{"commit_tokens": ["fixed", "missing", "import"], "add_tokens": "import buildcraft . core . render . BlockHighlightHandler ;", "del_tokens": ""}
+{"commit_tokens": ["do", "not", "change", "detected", "platform", "with", "initPlatformPrefix"], "add_tokens": "ourPlatformPrefixInitialized = true ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "RazorRepository", "to", "factory"], "add_tokens": "new RazorRepository ( ) ,", "del_tokens": ""}
+{"commit_tokens": ["make", "APersistentVector", ".", "SubVector", "public"], "add_tokens": "public static class SubVector extends APersistentVector implements IObj {", "del_tokens": "static class SubVector extends APersistentVector implements IObj {"}
+{"commit_tokens": ["Ensure", "only", "a", "single", "scroller", "animation", "callback", "per", "frame", "."], "add_tokens": "removeCallbacks ( this ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "Nullable", "/", "NotNull", "annotations", "."], "add_tokens": "@ NotNull", "del_tokens": "@ Nullable"}
+{"commit_tokens": ["Fix", "a", "silly", "bug"], "add_tokens": "this . finished = finished ;", "del_tokens": "this . finished = true ;"}
+{"commit_tokens": ["Remove", "http", "/", "wml", "from", "the", "DumpRenderTree", "skipped", "list", "as", "this", "directory", "no", "longer", "exists", "."], "add_tokens": "", "del_tokens": "\" http / wml \" ,"}
+{"commit_tokens": ["Set", "READ_REQUIRES_WRITE", "when", "initiating", "a", "handshake"], "add_tokens": "state | = FLAG_READ_REQUIRES_WRITE ;", "del_tokens": ""}
+{"commit_tokens": ["Don", "t", "override", "default", "SSL", "Socket", "Factory"], "add_tokens": "", "del_tokens": "HttpsURLConnection . setDefaultSSLSocketFactory ( SSLCertificateSocketFactory . getDefault ( socketOperationTimeout , sslSessionCache ) ) ;"}
+{"commit_tokens": ["remove", "debug", "item"], "add_tokens": "", "del_tokens": "setBackground ( Color . RED ) ;"}
+{"commit_tokens": ["Make", "go", "case", "sensitive", "language"], "add_tokens": "@ Override public boolean isCaseSensitive ( ) { return true ; }", "del_tokens": ""}
+{"commit_tokens": ["reduce", "visibility"], "add_tokens": "private void setConverter ( ) throws IOException {", "del_tokens": "protected void setConverter ( ) throws IOException {"}
+{"commit_tokens": ["added", "missing", "copyright", "header"], "add_tokens": "/ * * * This software is provided under the terms of the Minecraft Forge Public * License v1 . 0 . * /", "del_tokens": ""}
+{"commit_tokens": ["Removed", "call", "to", "Thread", ".", "dumpStack", "(", ")", "."], "add_tokens": "", "del_tokens": "Thread . dumpStack ( ) ;"}
+{"commit_tokens": ["Removed", "println"], "add_tokens": "", "del_tokens": "System . out . println ( focusedElement ) ;"}
+{"commit_tokens": ["use", "parameterized", "logging"], "add_tokens": "logger . debug ( \" Creating new CommitLog segment : { } \" , logFile ) ;", "del_tokens": "logger . debug ( \" Creating new CommitLog segment : \" + logFile ) ;"}
+{"commit_tokens": ["added", "break", "to", "exit", "loop", "on", "first", "match"], "add_tokens": "break ;", "del_tokens": ""}
+{"commit_tokens": ["Remove", "unneed", "clear", "in", "constructor", "."], "add_tokens": "", "del_tokens": "clear ( ) ;"}
+{"commit_tokens": ["fix", "bug"], "add_tokens": "package net . wequick . example . small ;", "del_tokens": "package net . wequick . example . small ."}
+{"commit_tokens": ["Fix", "HttpProxy", "."], "add_tokens": "/ / we need to resample the current proxy setup setProxyConfig ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "server", "launching", "."], "add_tokens": "FMLLaunchHandler . appendCoreMods ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Closes", "#", "2786", "PixmapPacker", "#", "updateTextureAtlas", "returned", "prematurely", "."], "add_tokens": "", "del_tokens": "return ;"}
+{"commit_tokens": ["LPS", "-", "49294", "Fix", "compile", "error"], "add_tokens": "_key = null ;", "del_tokens": ""}
+{"commit_tokens": ["help", "ID", "(", "PY", "-", "4115", ")"], "add_tokens": "return \" python . reference . pushMembersDown \" ;", "del_tokens": "return \" refactoring . pushMembersDown \" ;"}
+{"commit_tokens": ["threadsName", "should", "be", "attribute", "in", "threads", "DSL"], "add_tokens": "@ XmlAttribute", "del_tokens": "@ XmlTransient ( )"}
+{"commit_tokens": ["memory", "leak", "fixed", "(", "IDEADEV", "-", "15230", ")"], "add_tokens": "TreeModelBuilder . clearCaches ( myProject ) ;", "del_tokens": ""}
+{"commit_tokens": ["marking", "data", "table", "as", "dirty", "after", "record", "deletion"], "add_tokens": "markDirty ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Disable", "early", "open", "compaction"], "add_tokens": "/ / return conf . sstable_preemptive_open_interval_in_mb ; return - 1 ;", "del_tokens": "return conf . sstable_preemptive_open_interval_in_mb ;"}
+{"commit_tokens": ["Fixed", "a", "subtle", "bug", "I", "happened", "to", "introduce", "last", "night", "."], "add_tokens": "", "del_tokens": "return null ; return null ;"}
+{"commit_tokens": ["closes", "#", "558"], "add_tokens": "GET , POST , PUT , DELETE , HEAD , OPTIONS , TRACE , PATCH", "del_tokens": "GET , POST , PUT , DELETE , HEAD , OPTIONS , TRACE"}
+{"commit_tokens": ["Removed", "transition", "animation", "in", "audioplayer"], "add_tokens": "", "del_tokens": "ft . setTransition ( FragmentTransaction . TRANSIT_FRAGMENT_OPEN ) ;"}
+{"commit_tokens": ["I", "did", "not", "fix", "activity", "check", "correctly", "last", "time", "."], "add_tokens": "/ / Initialize access count if ( ACTIVITY_CHECK ) { accessCount = new AtomicInteger ( ) ; }", "del_tokens": ""}
+{"commit_tokens": ["Force", "a", "WebView", "pictureset", "invalidation", "on", "screen", "rotation", "."], "add_tokens": "contentInvalidateAll ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "41762", "Make", "admin", "have", "to", "agreedToTermsOfUse"], "add_tokens": "", "del_tokens": "user . setAgreedToTermsOfUse ( true ) ;"}
+{"commit_tokens": ["fixed", "StartVMTest", ".", "testNoAttach"], "add_tokens": "public static class MockConfiguration implements ModuleRunConfiguration {", "del_tokens": "private static class MockConfiguration implements ModuleRunConfiguration {"}
+{"commit_tokens": ["Do", "not", "return", "a", "super", "type", "if", "a", "class", "represents", "an", "interface", "."], "add_tokens": "return isInterface ( ) ? null : superClass ;", "del_tokens": "return superClass ;"}
+{"commit_tokens": ["Remove", "selection", "highlight", "when", "replacing", "/", "deleting", "."], "add_tokens": "selectionDone ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Make", "the", "default", "folder", "name", "size", "in", "the", "folder", "list", "the", "same", "as", "the", "default", "account", "name", "size", "in", "the", "account", "list"], "add_tokens": "folderName = MEDIUM ;", "del_tokens": "folderName = FONT_16SP ;"}
+{"commit_tokens": ["configure", "wizard", "to", "be", "modal", "or", "not"], "add_tokens": "wizard . showDialog ( true ) ;", "del_tokens": "wizard . showModalDialog ( ) ;"}
+{"commit_tokens": ["LPS", "-", "51081", "Fix", "liferayHome", "default", "value"], "add_tokens": "return appServerParentDir ;", "del_tokens": "return appServerParentDir . getParentFile ( ) ;"}
+{"commit_tokens": ["Fix", "indents"], "add_tokens": "return \" JSSE \" ;", "del_tokens": "return \" JSSE \" ;"}
+{"commit_tokens": ["Remove", "NAME", "from", "attribute", "definitions"], "add_tokens": "*", "del_tokens": ""}
+{"commit_tokens": ["Made", "Evaluator", "constructor", "public", "to", "allow", "custom", "implementations"], "add_tokens": "protected Evaluator ( ) {", "del_tokens": "Evaluator ( ) {"}
+{"commit_tokens": ["Removed", "@", "Override", "on", "an", "interface", "for", "1", ".", "5", "compatibility", "."], "add_tokens": "", "del_tokens": "@ Override"}
+{"commit_tokens": ["add", "PascalNameFilter"], "add_tokens": "public void close ( ) { this . out . close ( ) ; }", "del_tokens": ""}
+{"commit_tokens": ["Removed", "a", "System", ".", "out"], "add_tokens": "", "del_tokens": "System . out . println ( \" Copied \" + file ) ;"}
+{"commit_tokens": ["remove", "failed", "assertion"], "add_tokens": "", "del_tokens": "assert this . length ( ) < = payloadLength ;"}
+{"commit_tokens": ["Reverted", "var", "name", "change", "."], "add_tokens": "public void onActivityCreated ( Activity arg0 , Bundle arg1 ) {", "del_tokens": "public void onActivityCreated ( Activity activity , Bundle arg1 ) {"}
+{"commit_tokens": ["LPS", "-", "45500", "-", "Missed", "property", "in", "rename"], "add_tokens": "return PropsValues . ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE ;", "del_tokens": "return PropsValues . ASSET_PUBLISHER_SHOW_PERMISSIONS_ENABLED ;"}
+{"commit_tokens": ["test", "refactored", "cont"], "add_tokens": "", "del_tokens": "if ( executorService = = null ) { return ; }"}
+{"commit_tokens": ["Add", "a", "package", "private", "setTypeRegistry", "(", ")", "function", "to", "Compiler"], "add_tokens": "final void setTypeRegistry ( JSTypeRegistry typeRegistry ) { this . typeRegistry = typeRegistry ; }", "del_tokens": ""}
+{"commit_tokens": ["Remove", "erroneous", "JavaDoc"], "add_tokens": "", "del_tokens": "* If the collection does not exist , a new collection is created ."}
+{"commit_tokens": ["Fix", "AppCompatCheckedTextView", "tinting", "compound", "drawables"], "add_tokens": "return tintInfo ;", "del_tokens": ""}
+{"commit_tokens": ["removed", "unnecessary", "field", "assignment"], "add_tokens": "", "del_tokens": "myLastOffsetInNewTree = optimizedResult ;"}
+{"commit_tokens": ["Really", "leave", "text", "selection", "mode", "when", "using", "the", "trackball", "."], "add_tokens": "stopTextSelectionMode ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Removed", "unnecessary", "import", "."], "add_tokens": "", "del_tokens": "import android . app . Activity ;"}
+{"commit_tokens": ["added", "finally", "block", "that", "sets", "the", "system", "property", "back", "to", "null", "after", "use", "so", "as", "not", "to", "break", "other", "tests"], "add_tokens": "System . setProperty ( GrailsApplication . ENVIRONMENT , \" \" ) ;", "del_tokens": "System . setProperty ( GrailsApplication . ENVIRONMENT , null ) ;"}
+{"commit_tokens": ["getFileName", "(", ")", "should", "return", "the", "provided", "filename", "instead", "of", "a", "constant", "one"], "add_tokens": "return binaryDictPath ;", "del_tokens": "return DEFAULT_BINARY_DICT ;"}
+{"commit_tokens": ["Fix", "layer", "drawable", "inflation"], "add_tokens": "addLayer ( layer ) ;", "del_tokens": ""}
+{"commit_tokens": ["commit", "check"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Fix", "typo"], "add_tokens": "* Calls { @ link # onSetMainSession } .", "del_tokens": "* Calls { @ link # onSetMain } ."}
+{"commit_tokens": ["Enabled", "test", "of", "constructor", "signature", "there", "are", "unresolved", "superclasses", "(", "PY", "-", "4419", ")"], "add_tokens": "public void testUnresolvedSuperclass ( ) { / / PY - 4419", "del_tokens": "public void _testUnresolvedSuperclass ( ) { / / PY - 4419"}
+{"commit_tokens": ["fix", "setDescription", "does", "not", "set", "the", "value", "correctly"], "add_tokens": "this . email = new StringHolder ( description ) ;", "del_tokens": "this . email = email ;"}
+{"commit_tokens": ["fixed", "TestMusicPlayer", "to", "corectly", "initialize", "audioContext"], "add_tokens": "AudioContext . setAudioRenderer ( ar ) ;", "del_tokens": ""}
+{"commit_tokens": ["record", "missing", "metric"], "add_tokens": "metricsBean . feedUpdated ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "the", "build"], "add_tokens": "", "del_tokens": "return null ;"}
+{"commit_tokens": ["Prefer", "Integer", ".", "valueOf", "over", "explicit", "boxing"], "add_tokens": "return Integer . valueOf ( 1 ) ;", "del_tokens": "return new Integer ( 1 ) ;"}
+{"commit_tokens": ["commit", "transaction", "after", "indexing", "."], "add_tokens": "if ( isTransactional ) { ( ( TransactionalGraph ) graph ) . commit ( ) ; }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "tabs"], "add_tokens": "}", "del_tokens": "}"}
+{"commit_tokens": ["Fixed", "the", "fade", "color", "initialization"], "add_tokens": "", "del_tokens": "setCoveredFadeColor ( DEFAULT_FADE_COLOR ) ;"}
+{"commit_tokens": ["Rolling", "back", "ven", "s", "optimization", "."], "add_tokens": "myName = new String ( name ) ;", "del_tokens": "myName = name ;"}
+{"commit_tokens": ["Set", "database", "version", "to", "12", "."], "add_tokens": "db . setVersion ( DATABASE_VERSION ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "typo"], "add_tokens": "throw new AssertionError ( \" No instances . \" ) ;", "del_tokens": "throw new AssertionError ( \" No Instances . \" ) ;"}
+{"commit_tokens": ["IDEA", "-", "84892", "File", "annotations", "do", "not", "update", "on", "git", "commit"], "add_tokens": "checkAndFire ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "YAML", "Language", "display", "name"], "add_tokens": "return \" YAML \" ;", "del_tokens": "return \" Yaml \" ;"}
+{"commit_tokens": ["invoke", "connection", ".", "close", "method", "to", "close", "es", "connection"], "add_tokens": "client . close ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Do", "not", "return", "subscriber", "connection", "to", "prevent", "getting", "events"], "add_tokens": "disconnectSubscriber ( ) ;", "del_tokens": "jedisPool . returnResource ( jedisSubscriber ) ;"}
+{"commit_tokens": ["which", "will", "give", "us", "a", "reference", "to", "the", "Object", "that", "s", "probably", "not", "what", "we", "want"], "add_tokens": "new String ( validSpecialChars ) ) ;", "del_tokens": "validSpecialChars ) ;"}
+{"commit_tokens": ["Removed", "an", "unused", "variable", "."], "add_tokens": "", "del_tokens": "halfSize , - halfSize , - halfSize , halfSize , - halfSize , - halfSize , / / bottom float t = 1 ;"}
+{"commit_tokens": ["Organize", "import", "."], "add_tokens": "", "del_tokens": "import com . battlelancer . seriesguide . beta . R ;"}
+{"commit_tokens": ["jsvc", "actually", "wants", "the", "method", "to", "be", "named", "init", "not", "load", "(", "contrary", "to", "what", "their", "docs", "state", "in", "at", "least", "one", "place", ")"], "add_tokens": "public void init ( String [ ] args ) throws IOException , TTransportException", "del_tokens": "public void load ( String [ ] args ) throws IOException , TTransportException"}
+{"commit_tokens": ["added", "@", "Deprecated", "annotation", "to", "deprecated", "methods", "."], "add_tokens": "@ Deprecated", "del_tokens": ""}
+{"commit_tokens": ["Fix", "poi", "types"], "add_tokens": "if ( pt . isMap ( ) ) { return null ; }", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "@", "XmlAttribute", "in", "model"], "add_tokens": "@ XmlAttribute", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "race", "condition", "in", "DBTCPConnector", ".", "authenticate", "by", "putting", "in", "a", "call", "to", "checkMaster", "prior", "to", "getting", "a", "DBPort", "to", "authenticate", "on", "."], "add_tokens": "checkMaster ( false , true ) ;", "del_tokens": ""}
+{"commit_tokens": ["consolify", "submitted", "text", "when", "rendering", "incrementally"], "add_tokens": "/ / consolify just the data to be rendered emitRange ( consolify ( data ) , clazz , parent ) ;", "del_tokens": "emitRange ( data , clazz , parent ) ;"}
+{"commit_tokens": ["Record", "the", "dsym", "."], "add_tokens": "buildableContext . recordArtifact ( dsymPath ) ;", "del_tokens": ""}
+{"commit_tokens": ["add", "default", "ctor", "to", "Lexer"], "add_tokens": "public Lexer ( ) { }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "deadlock"], "add_tokens": "commitLock . unlock ( ) ;", "del_tokens": "commitLock . lock ( ) ;"}
+{"commit_tokens": ["Fix", "missing", "activate", "boolean"], "add_tokens": "return activate ( false ) ;", "del_tokens": "return activate ( ) ;"}
+{"commit_tokens": ["help", "ID", "(", "PY", "-", "4114", ")"], "add_tokens": "return \" python . reference . pullMembersUp \" ;", "del_tokens": "return \" refactoring . pullMembersUp \" ;"}
+{"commit_tokens": ["Fixed", "failing", "formatter", "tests", "."], "add_tokens": "NSError * error = nil ;", "del_tokens": "NSError * error ;"}
+{"commit_tokens": ["Remove", "override", "annotation", "so", "we", "can", "use", "the", "latest", "SDK", "to", "compile"], "add_tokens": "", "del_tokens": "@ Override"}
+{"commit_tokens": ["Fix", "database", "upgrade"], "add_tokens": "if ( db . needUpgrade ( 9 ) ) {", "del_tokens": "if ( db . needUpgrade ( 8 ) ) {"}
+{"commit_tokens": ["LPS", "-", "7524", "Forcibly", "kill", "DBBuilder", "process", "after", "building", "database"], "add_tokens": "System . exit ( 0 ) ;", "del_tokens": ""}
+{"commit_tokens": ["Make", "TranslucentConversionListener", "a", "SystemApi"], "add_tokens": "@ SystemApi", "del_tokens": ""}
+{"commit_tokens": ["Ignoring", "test", "that", "is", "redundant", "for", "com", ".", "zaxxer", ".", "hikari", ".", "pool", ".", "TestConnectionTimeoutRetry", ".", "testConnectionRetries", "(", "#", "678", ")"], "add_tokens": "@ Test @ org . junit . Ignore", "del_tokens": "@ Test"}
+{"commit_tokens": ["Make", "an", "internal", "class", "package", "private"], "add_tokens": "static class SubscriptionCallbackApi21 extends SubscriptionCallback {", "del_tokens": "public static class SubscriptionCallbackApi21 extends SubscriptionCallback {"}
+{"commit_tokens": ["Fix", "logic", "error", "in", "CarrierService", "."], "add_tokens": "return null ;", "del_tokens": "null ;"}
+{"commit_tokens": ["LPS", "-", "55175", "Fix", "SF"], "add_tokens": "if ( Validator . isNotNull ( _uploadMessage ) ) {", "del_tokens": "if ( Validator . isNull ( _uploadMessage ) ) {"}
+{"commit_tokens": ["Corrected", "method", "name", "setSelectedNavigationIndex", "to", "setSelectedNavigationItem", "in", "the", "exception", "message"], "add_tokens": "\" setSelectedNavigationItem not valid for current navigation mode \" ) ;", "del_tokens": "\" setSelectedNavigationIndex not valid for current navigation mode \" ) ;"}
+{"commit_tokens": ["added", "helper", "method", "for", "builder", "implementations"], "add_tokens": "protected void setCurrent ( Object current ) { this . current = current ; }", "del_tokens": ""}
+{"commit_tokens": ["HHH", "-", "6421", "Reduce", "log", "level", "of", "LazyInitializationException", "from", "ERROR", "to", "TRACE"], "add_tokens": "LOG . trace ( msg , this ) ;", "del_tokens": "LOG . error ( msg , this ) ;"}
+{"commit_tokens": ["Declare", "two", "fields", "as", "final", "in", "BsonBinaryReader", ".", "Mark"], "add_tokens": "private final int startPosition ; private final int size ;", "del_tokens": "private int startPosition ; private int size ;"}
+{"commit_tokens": ["Fix", "isUsbMassStorageConnected", "(", ")", "will", "always", "return", "true"], "add_tokens": "mUmsEnabling = enable ;", "del_tokens": "mUmsEnabling = true ;"}
+{"commit_tokens": ["Add", "some", "g3docs", "for", "the", "old", "and", "new", "type", "systems", "."], "add_tokens": "private SourceMapConsumerV3 parsedSourceMap = null ;", "del_tokens": "private volatile SourceMapConsumerV3 parsedSourceMap = null ;"}
+{"commit_tokens": ["between", "works", "only", "with", "numbers", "should", "also", "support", "dates"], "add_tokens": "@ NonNls String JAVA_LANG_COMPARABLE = \" java . lang . Comparable \" ;", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "a", "bug", "where", "the", "expand", "button", "was", "invisible"], "add_tokens": "updateExpandButtons ( mExpandable ) ;", "del_tokens": ""}
+{"commit_tokens": ["suppress", "warning"], "add_tokens": "/ / noinspection deprecation", "del_tokens": ""}
+{"commit_tokens": ["added", "highlightinglexertest", "to", "AllTestsSuite"], "add_tokens": "PyDeprecationTest . class , PythonHighlightingLexerTest . class", "del_tokens": "PyDeprecationTest . class"}
+{"commit_tokens": ["turned", "off", "domain", "name", "verification", "when", "verifiy", "checkbox", "is", "unchecked"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["clock", "skew", "detection", "needs", "to", "be", "closable", "it", "doesn", "t", "fix", "itself"], "add_tokens": "return true ;", "del_tokens": "return false ;"}
+{"commit_tokens": ["added", "PLoggerFactory", ".", "unregister", "(", ")"], "add_tokens": "PLoggerFactory . unregister ( this . binder ) ;", "del_tokens": ""}
+{"commit_tokens": ["Properly", "set", "back", "SSLParameters", "see", "#", "810"], "add_tokens": "sslEngine . setSSLParameters ( params ) ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "addPauseListener", "."], "add_tokens": "animator . addPauseListener ( disappearListener ) ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "Protocol", ".", "BASE_ETHERNET"], "add_tokens": "public static final int BASE_ETHERNET = 0x00084000 ;", "del_tokens": ""}
+{"commit_tokens": ["Don", "t", "play", "lock", "sound", "when", "just", "resetting", "Keyguard"], "add_tokens": "if ( mPendingLock ) {", "del_tokens": "if ( mPendingLock | | mPendingReset ) {"}
+{"commit_tokens": ["return", "the", "correct", "format", "for", "Instruction35s"], "add_tokens": "return Format . Format35s ;", "del_tokens": "return Format . Format35c ;"}
+{"commit_tokens": ["Fix", "some", "test", "failures"], "add_tokens": "return null ;", "del_tokens": "throw new RuntimeException ( \" Not implemented \" ) ;"}
+{"commit_tokens": ["increasing", "ROUND_JOIN_THRESHOLD", "in", "LineStroker", "to", "allow", "for", "line"], "add_tokens": "/ / private static final long ROUND_JOIN_THRESHOLD = 1000L ; private static final long ROUND_JOIN_THRESHOLD = 100000000L ;", "del_tokens": "private static final long ROUND_JOIN_THRESHOLD = 1000L ;"}
+{"commit_tokens": ["Restored", "the", "nonResizable", "nature", "of", "Font", "Size", "Field"], "add_tokens": "", "del_tokens": "layout . linkSize ( fontSizeField , consoleFontSizeField ) ; / / Not sure if this will fix the size bug on mac"}
+{"commit_tokens": ["Removing", "wrong", "equals", "method", "in", "comparator", "."], "add_tokens": "", "del_tokens": "public final boolean equals ( Object o ) { return false ; }"}
+{"commit_tokens": ["Call", "setExtent", "(", ")", "when", "setWorld", "(", ")", "is", "caleld", "on", "ParserContext", "."], "add_tokens": "setExtent ( world ) ;", "del_tokens": ""}
+{"commit_tokens": ["added", "constructor", "that", "takes", "the", "parent", "class", "loader"], "add_tokens": "public GroovyClassLoader ( ClassLoader loader ) { super ( loader ) ; }", "del_tokens": ""}
+{"commit_tokens": ["fixed", "checkstyle", "error"], "add_tokens": "public String getLintPath ( ) {", "del_tokens": "public String getLintPath ( ) {"}
+{"commit_tokens": ["added", "missing", "moco", "runner"], "add_tokens": "private MocoRunner ( ) { }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "copy", "/", "paste", "error", "-", "thanks", "kkolinko"], "add_tokens": "registerForEvent ( true , false ) ;", "del_tokens": "registerForEvent ( false , true ) ;"}
+{"commit_tokens": ["restore", "completion", "settings", "!"], "add_tokens": "CodeInsightSettings . getInstance ( ) . AUTOCOMPLETE_COMMON_PREFIX = true ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "used", "flag", "for", "write", "(", "int", ")", "."], "add_tokens": "used = true ;", "del_tokens": ""}
+{"commit_tokens": ["remove", "dangerous", "CTOR", "-", "not", "used", "in", "this", "driver"], "add_tokens": "", "del_tokens": "public ByteEncoder ( ByteBuffer buf ) { _buf = buf ; _buf . order ( Bytes . ORDER ) ; }"}
+{"commit_tokens": ["Remove", "a", "random", "blank", "line", "."], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Make", "git", "status", "command", "silent"], "add_tokens": "handler . setSilent ( true ) ;", "del_tokens": ""}
+{"commit_tokens": ["Drop", "unused", "private", "member", "mIgnoreGutter", "in", "ViewPager"], "add_tokens": "", "del_tokens": "private boolean mIgnoreGutter ;"}
+{"commit_tokens": ["Interrupt", "the", "current", "thread", "on", "catching", "InterruptedExcepted", "in", "the", "test", "runner", "."], "add_tokens": "Thread . currentThread ( ) . interrupt ( ) ;", "del_tokens": "/ / Blargh , continue ."}
+{"commit_tokens": ["enable", "copy", "reference", "in", "modal", "context", "(", "IDEA", "-", "13942", ")"], "add_tokens": "setEnabledInModalContext ( true ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "Spinner", "not", "restoring", "selection", "when", "set", "to", "GONE"], "add_tokens": "handleDataChanged ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "javadoc"], "add_tokens": "/ * * * * @ return the remainder of the line following a gerkin scenario definition . * /", "del_tokens": ""}
+{"commit_tokens": ["Remove", "debug", "code", "that", "was", "causing", "console", "spam", "in", "Forge", "."], "add_tokens": "", "del_tokens": "register ( this ) ;"}
+{"commit_tokens": ["moved", "getGraph", "to", "graph"], "add_tokens": "public Graph graph ( ) {", "del_tokens": "public Graph getGraph ( ) {"}
+{"commit_tokens": ["Throw", "an", "exception", "if", "unsupported", "verb", "is", "used"], "add_tokens": "throw new ServletException ( \" GET verb not implemented \" ) ;", "del_tokens": "/ / TODO Auto - generated method stub"}
+{"commit_tokens": ["Remove", "unused", "code"], "add_tokens": "", "del_tokens": "public void clearResponse ( ) { response = new StringBuilder ( ) ; }"}
+{"commit_tokens": ["Fix", "SupervisorProperty", "display", "name", "."], "add_tokens": "property . setDisplayName ( propertyDescription ) ;", "del_tokens": ""}
+{"commit_tokens": ["turn", "off", "indeterminate", "progress", "thing", "on", "sign", "out"], "add_tokens": "setSupportProgressBarIndeterminateVisibility ( false ) ;", "del_tokens": ""}
+{"commit_tokens": ["Updated", "version", "in", "Mongo", "class"], "add_tokens": "private static final String FULL_VERSION = \" 2 . 10 . 1 - SNAPSHOT \" ;", "del_tokens": "private static final String FULL_VERSION = \" 2 . 10 . 0 \" ;"}
+{"commit_tokens": ["IDEA", "-", "53534", "Fix", "wrong", "configurable", "selection", "on", "settings", "reopen"], "add_tokens": "return \" IntelliLang . Configuration \" ;", "del_tokens": "return getHelpTopic ( ) ;"}
+{"commit_tokens": ["Increased", "number", "of", "items", "for", "render", "from", "5", "to", "10"], "add_tokens": "final static private int numItemsToRender = 10 ;", "del_tokens": "final static private int numItemsToRender = 5 ;"}
+{"commit_tokens": ["Fix", "GTK", "+", "background", "in", "JBTable"], "add_tokens": "}", "del_tokens": "}"}
+{"commit_tokens": ["removed", "warning"], "add_tokens": "runTestOrdered ( Integer . valueOf ( 42 ) ) ;", "del_tokens": "runTestOrdered ( new Integer ( 42 ) ) ;"}
+{"commit_tokens": ["remove", "un", "-", "warning"], "add_tokens": "", "del_tokens": "@ SuppressWarnings ( \" unused \" )"}
+{"commit_tokens": ["don", "t", "suggest", "java", "class", "names", "in", "text", "fields", "with", "autocompletion", "(", "IDEA", "-", "117213", ")"], "add_tokens": "activeResult . stopHere ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Added", "better", "nested", "trxn", "tests", "."], "add_tokens": "@ Override public boolean isNestedSavePointsSupported ( ) { return false ; }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "bug", "with", "adding", "search", "source", "."], "add_tokens": "drawer . setDrawerListener ( null ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "build", "due", "to", "added", "API"], "add_tokens": "static class SubscriptionCallbackApi21 extends SubscriptionCallback {", "del_tokens": "public static class SubscriptionCallbackApi21 extends SubscriptionCallback {"}
+{"commit_tokens": ["update", "OK", "button"], "add_tokens": "updateButtons ( ) ;", "del_tokens": "updateButtons ( ) ;"}
+{"commit_tokens": ["Remove", "unnecessary", "import", "in", "DisplayUtils"], "add_tokens": "", "del_tokens": "import android . util . Log ;"}
+{"commit_tokens": ["Fix", "missing", "break", "in", "Icon", "class"], "add_tokens": "break ;", "del_tokens": ""}
+{"commit_tokens": ["undo", "a", "change"], "add_tokens": "/ / model . labelWords ( ) ;", "del_tokens": "model . labelWords ( ) ;"}
+{"commit_tokens": ["Fix", "typo", "thanks", "to", "Benjamin", "Hanzelmann"], "add_tokens": "nextRequest ( newRequest , future ) ;", "del_tokens": "nextRequest ( request , future ) ;"}
+{"commit_tokens": ["Renamed", "parent", "to", "endSubTable", "method", "."], "add_tokens": "public TableQuery endSubTable ( ) {", "del_tokens": "public TableQuery parent ( ) {"}
+{"commit_tokens": ["set", "filename"], "add_tokens": "g . fileName = fileName ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "always", "defaulting", "to", "DiskCacheAdapter"], "add_tokens": "if ( diskCache = = null ) { diskCache = new DiskCacheAdapter ( ) ; }", "del_tokens": "diskCache = new DiskCacheAdapter ( ) ;"}
+{"commit_tokens": ["remove", "unused", "field"], "add_tokens": "", "del_tokens": "private ThreadSpec threadSpec ;"}
+{"commit_tokens": ["getEntries", "(", ")", "doesn", "t", "really", "throw", "exceptions"], "add_tokens": "public List < BundleEntryInfo > getEntries ( ) {", "del_tokens": "public List < BundleEntryInfo > getEntries ( ) throws IOException {"}
+{"commit_tokens": ["Fix", "broken", "trust", "agent", "reloading", "v2"], "add_tokens": "mActiveAgents . remove ( info ) ;", "del_tokens": "mObsoleteAgents . remove ( info ) ;"}
+{"commit_tokens": ["Deactivate", "PDF", "export", "."], "add_tokens": "", "del_tokens": "@ ServiceProvider ( service = VectorialFileExporter . class )"}
+{"commit_tokens": ["added", "release", "notes", "for", "3", ".", "2", ".", "2", "patch"], "add_tokens": "} @ Override public void mapCleared ( MapEvent event ) {", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "@", "Override", "annotation", "."], "add_tokens": "@ Override", "del_tokens": ""}
+{"commit_tokens": ["add", "todo"], "add_tokens": "/ / todo : package index is required", "del_tokens": ""}
+{"commit_tokens": ["CompositeShader", "add", "unimplemented", "method", "to", "fix", "warning"], "add_tokens": "public void init ( ) { } @ Override", "del_tokens": ""}
+{"commit_tokens": ["Fix", "an", "IllegalArgumentException", "for", "the", "parent", "frame", "of", "a", "file", "dialog", "."], "add_tokens": "if ( parent = = null ) parent = new Frame ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["remove", "spurious", "import"], "add_tokens": "", "del_tokens": "import com . sun . jmx . snmp . internal . SnmpDecryptedPdu ;"}
+{"commit_tokens": ["Fix", "incorrect", "merge", "conflict", "to", "klp", "-", "modular", "-", "dev", "-", "plus", "-", "aosp"], "add_tokens": "/ * package * / long getNativeTheme ( ) {", "del_tokens": "/ * package * / int getNativeTheme ( ) {"}
+{"commit_tokens": ["include", "cause", "of", "configuration", "exception", "that", "Shouldn", "t", "Happen"], "add_tokens": "throw new RuntimeException ( e ) ;", "del_tokens": "throw new RuntimeException ( ) ;"}
+{"commit_tokens": ["Fixed", "compile", "error", "caused", "by", "final", "keyword"], "add_tokens": "Record r ;", "del_tokens": "final Record r ;"}
+{"commit_tokens": ["Fixed", "crash", "when", "playbackservice", "wasn", "t", "running", "and", "no", "last", "played", "media"], "add_tokens": "setupGUI ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Updated", "schema", "version"], "add_tokens": "return \" 3 . 1 \" ;", "del_tokens": "return \" 3 . 0 \" ;"}
+{"commit_tokens": ["Remove", "unused", "import", "."], "add_tokens": "", "del_tokens": "import water . persist . Persist ;"}
+{"commit_tokens": ["Fix", "the", "build", "when", "ViewDebug", ".", "TRACE_RECYCLER", "is", "set", "to", "true", "."], "add_tokens": "int index = 0 ;", "del_tokens": "int index ;"}
+{"commit_tokens": ["Don", "t", "reference", "the", "enclosing", "type", "instance", "when", "it", "s", "not", "used", "(", "memory", "optimisation", ")"], "add_tokens": "static class FooterViewHolder", "del_tokens": "class FooterViewHolder"}
+{"commit_tokens": ["Removed", "a", "notification", "statement", "from", "the", "method", "ExtensionHistory", "#", "addHistory", "(", "HistoryReference", ")", "as", "the", "list", "was", "already", "notified", "when", "that", "statement", "is", "reached", "."], "add_tokens": "", "del_tokens": "historyList . notifyItemChanged ( historyRef ) ;"}
+{"commit_tokens": ["change", "result", "type", "to", "long", "(", "copy", "&", "paste", "error", ")"], "add_tokens": "return ClassHelper . double_TYPE ;", "del_tokens": "return ClassHelper . long_TYPE ;"}
+{"commit_tokens": ["Add", "@", "SuppressWarnings", "(", "serial", ")", "to", "an", "Exception", "."], "add_tokens": "@ SuppressWarnings ( \" serial \" )", "del_tokens": ""}
+{"commit_tokens": ["Set", "activity", "state", "correctly", "when", "ending", "activity", "."], "add_tokens": "this . activityState = ACTIVITY_EXITING ;", "del_tokens": ""}
+{"commit_tokens": ["Add", "missing", "R", "file", "change", "."], "add_tokens": "public static final int selectableItemBackground = 0x10a13 ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "a", "bug", "that", "findbugs", "found"], "add_tokens": "super ( context ) ;", "del_tokens": "super ( null ) ;"}
+{"commit_tokens": ["Fix", "ping"], "add_tokens": "service . registerReactor ( this ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "constructor", "error", "introduced", "in", "last", "checkin"], "add_tokens": "this . program = program ;", "del_tokens": ""}
+{"commit_tokens": ["Change", "the", "scope"], "add_tokens": "public void initWebSocket ( ) {", "del_tokens": "protected void initWebSocket ( ) {"}
+{"commit_tokens": ["Remove", "unused", "import", "in", "Scheduler", ".", "java"], "add_tokens": "", "del_tokens": "import android . util . Log ;"}
+{"commit_tokens": ["add", "pm"], "add_tokens": "\" ng \" , \" pm \"", "del_tokens": "\" ng \""}
+{"commit_tokens": ["Add", "the", "rather", "crucial", "missing", "i", "+", "+", "in", "the", "wait", "loop"], "add_tokens": "i + + ;", "del_tokens": ""}
+{"commit_tokens": ["Remove", "unnecessary", "rule", "key", "inclusion", "."], "add_tokens": "return builder ;", "del_tokens": "return builder . setReflectively ( \" srcs \" , getResolver ( ) . filterInputsToCompareToOutput ( sources ) ) ;"}
+{"commit_tokens": ["Adding", "missing", "break", "statement", "in", "VideoCallProvider", "."], "add_tokens": "break ;", "del_tokens": ""}
+{"commit_tokens": ["Removed", "bogus", "comment"], "add_tokens": "", "del_tokens": "/ / @ todo what is the argument ?"}
+{"commit_tokens": ["Add", "channels", "to", "the", "schema", "."], "add_tokens": "\" height \" , \" channels \"", "del_tokens": "\" height \""}
+{"commit_tokens": ["Reduced", "the", "radio", "log"], "add_tokens": "", "del_tokens": "logd ( \" getSimStateForSubscriber : simState = \" + simState + \" slotIdx = \" + slotIdx ) ;"}
+{"commit_tokens": ["prune", "zero", "count", "rankings", "after", "each", "emit"], "add_tokens": "super . getRankings ( ) . pruneZeroCounts ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "51886", "add", "@", "override"], "add_tokens": "@ Override", "del_tokens": ""}
+{"commit_tokens": ["Fix", "reading", "sleep", "policy"], "add_tokens": "readWifiSleepPolicy ( ) ;", "del_tokens": "readStayAwakeConditions ( ) ;"}
+{"commit_tokens": ["Removed", "unused", "import", "in", "Format", "class"], "add_tokens": "", "del_tokens": "import alluxio . cli . Version ;"}
+{"commit_tokens": ["Do", "not", "expose", "WifiManager", ".", "isNanSupported", "as", "new", "API"], "add_tokens": "* @ hide", "del_tokens": "* @ hide PROPOSED_NAN_API"}
+{"commit_tokens": ["Addressing", "review", "comments", "."], "add_tokens": "protected final String mBaseDir ;", "del_tokens": "protected String mBaseDir ;"}
+{"commit_tokens": ["change", "JdbcDate", "to", "return", "Types", ".", "TIMESTAMP"], "add_tokens": "return Types . TIMESTAMP ;", "del_tokens": "return Types . DATE ;"}
+{"commit_tokens": ["Fix", "compile", "error"], "add_tokens": "", "del_tokens": "import android . * ;"}
+{"commit_tokens": ["IDEA", "-", "115227", "No", "auto", "completion", "for", "non", "getter", "jsp", "expression", "language", "methods"], "add_tokens": "JspVersion MAX_VERSION = JSP_2_3 ;", "del_tokens": ""}
+{"commit_tokens": ["remove", "unhelpful", "System", ".", "out", ".", "println"], "add_tokens": "", "del_tokens": "System . out . println ( \" Caught an exception here \" ) ;"}
+{"commit_tokens": ["add", "TODO", "in", "CBA", "rebalancing"], "add_tokens": "/ / TODO Should we send an event on the bus for Analytics ?", "del_tokens": ""}
+{"commit_tokens": ["remove", "debug", "message"], "add_tokens": "", "del_tokens": "System . out . println ( \" setup start = \" + setupStart ) ;"}
+{"commit_tokens": ["Removed", "close", "(", ")", "override", "that", "did", "nothing", "and", "did", "not", "call", "super", ".", "close", "(", ")"], "add_tokens": "", "del_tokens": "public void close ( ) { } @ Override"}
+{"commit_tokens": ["fixing", "version", "number"], "add_tokens": "static String VERSION_NAME = \" 0164 \" ;", "del_tokens": "static String VERSION_NAME = \" 0165 \" ;"}
+{"commit_tokens": ["update", "color"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Set", "max", "pool", "size", "before", "core", "to", "avoid", "IAE", "by", "OpenJDK", "implementation", "."], "add_tokens": "setCorePoolSize ( threadCount ) ;", "del_tokens": "setCorePoolSize ( threadCount ) ;"}
+{"commit_tokens": ["cleanup", "in", "pde", "properties", "turn", "off", "lighting", "by", "default", "in", "ProcessingApplet"], "add_tokens": "/ / do all the defaults down here , because / / subclasses need to go through this function g . lighting = false ;", "del_tokens": ""}
+{"commit_tokens": ["Added", "override", "tag"], "add_tokens": "@ Override", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "merge", "mistake", "."], "add_tokens": "", "del_tokens": "s"}
+{"commit_tokens": ["finish", "the", "same", "action", "that", "was", "started", ";", "cleanup", "and", "generify"], "add_tokens": "void run ( List < VcsException > exceptionList ) ;", "del_tokens": "void run ( List exceptionList ) ;"}
+{"commit_tokens": ["Removed", "printStackTrace"], "add_tokens": "/ / Ignore", "del_tokens": "e . printStackTrace ( ) ;"}
+{"commit_tokens": ["change", "version", "num", "and", "year", "for", "the", "release", "of", "libsvm", "3", ".", "15"], "add_tokens": "public static final int LIBSVM_VERSION = 315 ;", "del_tokens": "public static final int LIBSVM_VERSION = 314 ;"}
+{"commit_tokens": ["Added", "generic", "argument", "to", "ICollection"], "add_tokens": "public interface IQueue < E > extends ICollection < E > , BlockingQueue < E > , ICommon {", "del_tokens": "public interface IQueue < E > extends ICollection , BlockingQueue < E > , ICommon {"}
+{"commit_tokens": ["exclude", "incompatible", "test", "case"], "add_tokens": "public void testConfiguration ( ) { } @ Override", "del_tokens": ""}
+{"commit_tokens": ["Optimize", "imports", "."], "add_tokens": "", "del_tokens": "import android . content . res . Resources ;"}
+{"commit_tokens": ["Hide", "the", "keyguard", "scrim", "when", "the", "status", "bar", "comes", "back", "."], "add_tokens": "mKeyguardDelegate . hideScrim ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "39399", "We", "shouldn", "t", "return", "-", "1"], "add_tokens": "return WorkflowConstants . STATUS_APPROVED ;", "del_tokens": "return - 1 ;"}
+{"commit_tokens": ["Add", "the", "inadvertently", "missing", "SCHEME", "string", "value", "provider"], "add_tokens": "StringFilter . SCHEME ,", "del_tokens": ""}
+{"commit_tokens": ["Breaks", "the", "loop"], "add_tokens": "break ;", "del_tokens": ""}
+{"commit_tokens": ["Increase", "NamedHealthCheck", "#", "getName", "visibility", "to", "public"], "add_tokens": "public abstract String getName ( ) ;", "del_tokens": "abstract String getName ( ) ;"}
+{"commit_tokens": ["removed", "non", "-", "functional", "history", "tree", "provider"], "add_tokens": "return null ;", "del_tokens": "return new GitHistoryTreeProvider ( ) ;"}
+{"commit_tokens": ["Made", "getDriverClassName", "(", ")", "be", "protected", "and", "not", "part", "of", "the", "interface", "."], "add_tokens": "@ Override protected String getDriverClassName ( ) {", "del_tokens": "public String getDriverClassName ( ) {"}
+{"commit_tokens": ["Working", "out", "the", "kinks"], "add_tokens": "powerHandler . configure ( 2 , 300 , 1 , 1500 ) ;", "del_tokens": "powerHandler . configure ( 2 , 250 , 1 , 1500 ) ;"}
+{"commit_tokens": ["Removing", "@", "Override", "to", "fix", "the", "build"], "add_tokens": "", "del_tokens": "@ Override"}
+{"commit_tokens": ["Revert", "marked", "class", "as", "abstract"], "add_tokens": "public class AbstractJavaClass {", "del_tokens": "public abstract class AbstractJavaClass {"}
+{"commit_tokens": ["removed", "spurious", "System", ".", "out", ".", "println", "(", ")"], "add_tokens": "", "del_tokens": "System . out . println ( \" hashCode got called \" ) ;"}
+{"commit_tokens": ["make", "Flusher", "a", "static", "inner", "class"], "add_tokens": "private static final class Flusher implements Runnable", "del_tokens": "private final class Flusher implements Runnable"}
+{"commit_tokens": ["Fix", "transaction", "(", ")", "returning", "null"], "add_tokens": "return delegate . transaction ( ) ;", "del_tokens": "return null ;"}
+{"commit_tokens": ["Ease", "the", "validations", "on", "DatabaseConfiguration", "#", "url", "."], "add_tokens": "", "del_tokens": "@ URL ( protocol = \" jdbc \" )"}
+{"commit_tokens": ["Remove", "dead", "store", "to", "environmentConfig", "."], "add_tokens": "", "del_tokens": "environmentConfig = new EnvironmentConfig ( ) ;"}
+{"commit_tokens": ["Remove", "unused", "import", "."], "add_tokens": "", "del_tokens": "import java . io . FileNotFoundException ;"}
+{"commit_tokens": ["do", "not", "touch", "linefeeds"], "add_tokens": "whiteSpace . setLineFeedsAreReadOnly ( true ) ;", "del_tokens": ""}
+{"commit_tokens": ["Updated", "version"], "add_tokens": "return \" 0 . 3 . 1 \" ;", "del_tokens": "return \" 0 . 3 . 0 \" ;"}
+{"commit_tokens": ["Fix", "LayoutInflater", "copy", "constructor", "logic", "."], "add_tokens": "setFilter ( original . mFilter ) ;", "del_tokens": "mFilter = original . mFilter ;"}
+{"commit_tokens": ["Prevent", "TypeMap", "0", "being", "useful"], "add_tokens": "\" BAD \" ,", "del_tokens": ""}
+{"commit_tokens": ["Fix", "checkstyle", "errors"], "add_tokens": "notifyAdditionalOnScrollStateChangedListener ( view , scrollState ) ;", "del_tokens": "notifyAdditionalOnScrollStateChangedListener ( view , scrollState ) ;"}
+{"commit_tokens": ["Add", "a", "class", "PlainSaslServer", "that", "implements", "the", "SaslServer", "interface", "-", "-", "fix", "the", "method", "name", "from", "setup", "to", "before"], "add_tokens": "public void before ( ) throws Exception {", "del_tokens": "public void setup ( ) throws Exception {"}
+{"commit_tokens": ["Revert", "Remove", "spurious", "@", "Override", "."], "add_tokens": "* @ Override", "del_tokens": ""}
+{"commit_tokens": ["Fix", "compile", "-", "time", "issue", "with", "generics"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Fix", "source", "formatter"], "add_tokens": "continue ;", "del_tokens": "return ;"}
+{"commit_tokens": ["Added", "IPC", "exception", "(", "support", "info", ")"], "add_tokens": "\" com . android . contacts . model . AccountTypeManagerImpl \" ,", "del_tokens": ""}
+{"commit_tokens": ["fixed", "javadoc"], "add_tokens": "* @ param componentType Component type of the array", "del_tokens": ""}
+{"commit_tokens": ["remove", "unused", "field"], "add_tokens": "", "del_tokens": "private final int gcBefore = CompactionManager . NO_GC ;"}
+{"commit_tokens": ["Deprecate", "also", "implementation", "method"], "add_tokens": "@ Deprecated", "del_tokens": ""}
+{"commit_tokens": ["remove", "empty", "static", "initializer", "from", "unit", "test", "for", "on", "master", "branch"], "add_tokens": "", "del_tokens": "static { }"}
+{"commit_tokens": ["Add", "documentation", "for", "size", "(", ")"], "add_tokens": "/ * * * Returns the number of nodes in the graph * /", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "22629", "Fix", "bug", "where", "verifyUrlTitle", "was", "accidentally", "removed", "in", "6f3f31f5d747991cf4acba93307eccfbfbf824d3"], "add_tokens": "verifyURLTitle ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Spell", "better"], "add_tokens": "public void testGroupByWithNonexistentDimension ( ) throws Exception", "del_tokens": "public void testGroupByWithNonexistantDimension ( ) throws Exception"}
+{"commit_tokens": ["Fix", "issue", "with", "arrow", "not", "enable", "when", "setting", "maxDate"], "add_tokens": "updateUi ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Keep", "the", "debug", "message", "for", "now"], "add_tokens": "break ;", "del_tokens": "return SocketState . CLOSED ;"}
+{"commit_tokens": ["Fix", "typo", "."], "add_tokens": "/ / unconstructable", "del_tokens": "/ / unconstrucable"}
+{"commit_tokens": ["Fix", "deselction", "of", "all", "gpx"], "add_tokens": "saveCurrentSelections ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "formatting", "of", "data", "structure", "test", "code"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Make", "OreDictionary", ".", "initVanillaEntries", "(", ")", "private", "so", "that", "dumb", "modders", "will", "stop", "calling", "it", "."], "add_tokens": "private static void initVanillaEntries ( )", "del_tokens": "public static void initVanillaEntries ( )"}
+{"commit_tokens": ["Fix", "issue", "with", "ForwardingEjbClientConfiguration"], "add_tokens": "return delegate . getInvocationTimeout ( ) ;", "del_tokens": "return 0 ;"}
+{"commit_tokens": ["LPS", "-", "64771", "Set", "_latestHASH", "before", "_createPluginsSummary", "(", ")", ";"], "add_tokens": "_createPluginsSummary ( ) ;", "del_tokens": "_createPluginsSummary ( ) ;"}
+{"commit_tokens": ["LPS", "-", "11221", "Source", "formatting", "(", "added", "a", "line", "break", ")"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Return", "the", "document", "if", "a", "<", "/", "stream", ">", "is", "received", "."], "add_tokens": "if ( count < 1 ) {", "del_tokens": "if ( count = = 0 ) {"}
+{"commit_tokens": ["fixed", "wrong", "suite"], "add_tokens": "return new JtxTests ( ) ;", "del_tokens": "return new DbTests ( ) ;"}
+{"commit_tokens": ["build", "number", "11"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["Clears", "reference", "to", "certificate", "dialog", "service", "on", "bundle", "stop", "."], "add_tokens": "certificateDialogService = null ;", "del_tokens": ""}
+{"commit_tokens": ["Allow", "JSC", "to", "understand", "the", "basic", "class", "relationships", "(", "excluding", "interfaces", ")", "."], "add_tokens": "public SubclassRelationship ( SubclassType type ,", "del_tokens": "SubclassRelationship ( SubclassType type ,"}
+{"commit_tokens": ["Empty", "Line", "Separator", "Check", "compilable", "UT", "inputs"], "add_tokens": "public int compareTo ( Object aObject )", "del_tokens": "public int compareTo ( InputGenericWhitespaceCheck aObject )"}
+{"commit_tokens": ["Fix", "rare", "segfault", "with", "proper", "size", "(", ")", "and", "check", "for", "null", "ids"], "add_tokens": "return index2Item . size ( ) ;", "del_tokens": "return index . get ( ) ;"}
+{"commit_tokens": ["dispatch", "up", "event", "to", "fix", "fling"], "add_tokens": "dragContentView . dispatchTouchEvent ( event ) ;", "del_tokens": ""}
+{"commit_tokens": ["Use", "correct", "version", "code", "for", "summer", "time", "fix", "upgrade", "."], "add_tokens": "private static final int VER_SUMMERTIME_FIX = 155 ;", "del_tokens": "private static final int VER_SUMMERTIME_FIX = 151 ;"}
+{"commit_tokens": ["Removed", "spurious", "log", "about", "blinking", "cursor"], "add_tokens": "", "del_tokens": "Log . d ( \" GILLES \" , \" blinking ! ! ! \" ) ;"}
+{"commit_tokens": ["Cache", "recordsStores", "should", "be", "cleaned", "up", "during", "service", "shutdown"], "add_tokens": "recordStores . clear ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["ignore", "this", "for", "now"], "add_tokens": "@ Ignore", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "61129", "Create", "inner", "exception", "class"], "add_tokens": "public static class MustOwnLock extends FileEntryLockException { }", "del_tokens": ""}
+{"commit_tokens": ["remove", "unused", "found", "from", "GHResponse"], "add_tokens": "", "del_tokens": "private boolean found ;"}
+{"commit_tokens": ["Add", "getBytes", "to", "InputStream", "URL", "and", "File", "(", "patch", "thanks", "to", "jeremi", "Joslin", ")"], "add_tokens": "* @ author jeremi Joslin", "del_tokens": ""}
+{"commit_tokens": ["fixed", "checkstyle", "error"], "add_tokens": "}", "del_tokens": "}"}
+{"commit_tokens": ["prune", "empty", "directories", "when", "switching", "to", "just", "created", "tag", "or", "branch"], "add_tokens": "return true ;", "del_tokens": "return false ;"}
+{"commit_tokens": ["fixed", "NPE"], "add_tokens": "} catch ( Throwable ex ) {", "del_tokens": "} catch ( java . net . URISyntaxException ex ) {"}
+{"commit_tokens": ["Added", "missing", "test", "flag"], "add_tokens": "reset = false ;", "del_tokens": ""}
+{"commit_tokens": ["restore", "initial", "selection", "in", "NameSuggestionsField", "(", "IDEADEV", "-", "20506", ")"], "add_tokens": "comboEditor . selectAll ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Check", "mWebViewCore", "to", "prevent", "potential", "NPE", "."], "add_tokens": "if ( mWebViewCore = = null ) { return ; }", "del_tokens": ""}
+{"commit_tokens": ["Remove", "checked", "exception", "from", "Buffer", ".", "readByteArray", "."], "add_tokens": "@ Override public byte [ ] readByteArray ( ) {", "del_tokens": "@ Override public byte [ ] readByteArray ( ) throws IOException {"}
+{"commit_tokens": ["restored", "@", "Test", "annotation", "in", "SimpleValidateQueryTests"], "add_tokens": "@ Test", "del_tokens": ""}
+{"commit_tokens": ["Don", "t", "log", "interruption", "here", "as", "it", "happens", "and", "it", "s", "ok", "(", "EA", "-", "36726", ")", "."], "add_tokens": "/ / pass", "del_tokens": "LOG . error ( e ) ;"}
+{"commit_tokens": ["Lowering", "recon", "batch", "size", "from", "7", "to", "3", "to", "avoid", "timeout", "problem", "."], "add_tokens": "return 3 ;", "del_tokens": "return 7 ;"}
+{"commit_tokens": ["Pass", "environment", "from", "settings", "to", "console", "process", "."], "add_tokens": "myEnvironmentVariables . putAll ( consoleSettings . getEnvs ( ) ) ;", "del_tokens": ""}
+{"commit_tokens": ["Remove", "redundant", "static", "modifier"], "add_tokens": "public interface IZAddress", "del_tokens": "static interface IZAddress"}
+{"commit_tokens": ["Added", "missing", "final", "keyword"], "add_tokens": "public final int getIndex ( String fieldName ) {", "del_tokens": "public int getIndex ( String fieldName ) {"}
+{"commit_tokens": ["fix", "the", "robot", "smoke", "particle", "causing", "fps", "drops", "in", "certain", "cases"], "add_tokens": "this . motionY = 0 . 001D ;", "del_tokens": "this . motionY * = 1 . 1D ;"}
+{"commit_tokens": ["Remove", "unused", "import"], "add_tokens": "", "del_tokens": "import sun . management . snmp . jvmmib . EnumJvmMemPoolType ;"}
+{"commit_tokens": ["Remove", "public", "from", "ScriptIntrinsicYuvToRGBThunker", "definition", "."], "add_tokens": "class ScriptIntrinsicYuvToRGBThunker extends ScriptIntrinsicYuvToRGB {", "del_tokens": "public class ScriptIntrinsicYuvToRGBThunker extends ScriptIntrinsicYuvToRGB {"}
+{"commit_tokens": ["data", "type", "convert", "error", "."], "add_tokens": "return MysqlDefs . FIELD_TYPE_DECIMAL ;", "del_tokens": "return MysqlDefs . FIELD_TYPE_LONG ;"}
+{"commit_tokens": ["LPS", "-", "59594", "Remove", "unused", "variable"], "add_tokens": "", "del_tokens": "@ DeleteAfterTestRun private final List < Organization > _organizations = new ArrayList < > ( ) ;"}
+{"commit_tokens": ["Fix", "an", "erroneous", "import"], "add_tokens": "", "del_tokens": "import org . mockito . internal . matchers . InstanceOf ;"}
+{"commit_tokens": ["Remove", "unneeded", "method"], "add_tokens": "", "del_tokens": "/ * * * Destroy the { @ link AtmosphereServletProcessor } * / void destroy ( ) ;"}
+{"commit_tokens": ["Allow", "null", "filenamePattern", "in", "RequestLogConfiguration"], "add_tokens": "", "del_tokens": "@ NotNull"}
+{"commit_tokens": ["after", "project", "share", "performing", "some", "actions", "remain", "disabled", "until", "project", "reopening", ")"], "add_tokens": "activeVcs . invokeRefreshSvnRoots ( true ) ;", "del_tokens": ""}
+{"commit_tokens": ["don", "t", "touch", "platform", "prefix", "if", "app", "is", "already", "initialized"], "add_tokens": "public static boolean isInitialized ( ) { return ourInstance ! = null ; }", "del_tokens": ""}
+{"commit_tokens": ["Implemented", "pre", "-", "key", "lookup"], "add_tokens": "FAILURE , StoredProcedureResult ,", "del_tokens": "FAILURE ,"}
+{"commit_tokens": ["Fixed", "typo", "in", "doc"], "add_tokens": "* / / do worK", "del_tokens": "* / / do worth"}
+{"commit_tokens": ["fixed", "failing", "master"], "add_tokens": "class AnonymousIC", "del_tokens": "class Anonymous"}
+{"commit_tokens": ["set", "a", "REASON_CHANGE_REQUESTED_BY_USER", "code", "to", "the", "unregister", "event", "when", "caused", "by", "us", "."], "add_tokens": ", RegistrationStateChangeEvent . REASON_CHANGE_REQUESTED_BY_USER", "del_tokens": ", RegistrationStateChangeEvent . REASON_NOT_SPECIFIED"}
+{"commit_tokens": ["Fix", "thread", "interrupt", "test"], "add_tokens": "/ / Clear interrupt flag Thread . interrupted ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Restored", "public", "access", "for", "Entities", ".", "EscapeMode"], "add_tokens": "public class Entities {", "del_tokens": "class Entities {"}
+{"commit_tokens": ["Removes", "an", "empty", "line"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["removed", "the", "commented", "-", "out", "method", "per", "discussion", "."], "add_tokens": "", "del_tokens": "/ / void bindTo ( BindingContext bindingContext ) ;"}
+{"commit_tokens": ["Remove", "obsolete", "comment"], "add_tokens": "", "del_tokens": "/ / public for ReplaceDebugStringsTest"}
+{"commit_tokens": ["Added", "a", "property", "to", "avoid", "the", "exception", "stack", "trace", "when", "running", "the", "console"], "add_tokens": "public GroovyShell getShell ( ) { return shell ; }", "del_tokens": ""}
+{"commit_tokens": ["Have", "output", "for", "valid", "configuration", "."], "add_tokens": "System . out . println ( \" All configuration entries are valid . \" ) ;", "del_tokens": ""}
+{"commit_tokens": ["CORE", "-", "1661", "Add", "support", "for", "MSSQL", "sequences"], "add_tokens": "", "del_tokens": "| | database instanceof MSSQLDatabase"}
+{"commit_tokens": ["Delegate", "exclude", "mimetypes", "to", "FasttrackBadgeWidget"], "add_tokens": "mPhotoView . setExcludeMimes ( excludeMimes ) ;", "del_tokens": ""}
+{"commit_tokens": ["Added", "missing", "@", "Override", "annotation", "in", "QueryCacheRecord", "."], "add_tokens": "@ Override", "del_tokens": ""}
+{"commit_tokens": ["Try", "8", "KiB", "segments", "."], "add_tokens": "static final int SIZE = 8192 ;", "del_tokens": "static final int SIZE = 2048 ;"}
+{"commit_tokens": ["deprecate", "unused", "method"], "add_tokens": "@ Deprecated", "del_tokens": ""}
+{"commit_tokens": ["Fix", "hillshade", "layer", "appearance"], "add_tokens": "hillshadeLayer = null ;", "del_tokens": ""}
+{"commit_tokens": ["Fix", "error", "in", "settings", ".", "db", "upgrader", "."], "add_tokens": "upgradeVersion = 37 ;", "del_tokens": "upgradeVersion = 36 ;"}
+{"commit_tokens": ["Remove", "backup", "of", "sleep", "policy", "setting"], "add_tokens": "", "del_tokens": "WIFI_SLEEP_POLICY ,"}
+{"commit_tokens": ["always", "focus", "ok", "button", "in", "message", "dialog"], "add_tokens": "if ( okButton_ ! = null ) FocusHelper . setFocusDeferred ( okButton_ ) ;", "del_tokens": ""}
+{"commit_tokens": ["Don", "t", "change", "keyboard", "state", "in", "setIconifiedByDefault", "."], "add_tokens": "", "del_tokens": "setImeVisibility ( ! iconified ) ;"}
+{"commit_tokens": ["Added", "a", "protected", "method", "to", "retrieve", "the", "indent", "printer", "for", "reuse", "in", "subclasses", "of", "MarkupBuilder"], "add_tokens": "protected IndentPrinter getPrinter ( ) { return this . out ; }", "del_tokens": ""}
+{"commit_tokens": ["Fix", "@", "since", "for", "EscaperAsserts", "."], "add_tokens": "* @ since 15 . 0", "del_tokens": "* @ since 11 . 0"}
+{"commit_tokens": ["Fix", "typo"], "add_tokens": "* Invoked when the request body has been fully read .", "del_tokens": "* Invoked when the request bdy has been fully read ."}
+{"commit_tokens": ["Investigating", "BZ", "59261"], "add_tokens": "resetTracker ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Fixed", "infinite", "loop", "in", "FileObserverService"], "add_tokens": "parentPath = new File ( parentPath ) . getParent ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Actually", "return", "the", "registry", "entry", "not", "null", "."], "add_tokens": "return object ;", "del_tokens": "return null ;"}
+{"commit_tokens": ["Updated", "Timeline", "to", "handle", "fetchack", "message", "type", "."], "add_tokens": "case fetchack :", "del_tokens": ""}
+{"commit_tokens": ["Fix", "build", "break"], "add_tokens": "* * @ hide", "del_tokens": ""}
+{"commit_tokens": ["LPS", "-", "55026", "add", "@", "Deprecated"], "add_tokens": "@ Deprecated", "del_tokens": ""}
+{"commit_tokens": ["make", "minute", "standard", "histogram", "interval", "."], "add_tokens": "interval = \" minute \" ;", "del_tokens": "interval = \" hour \" ;"}
+{"commit_tokens": ["Fix", "a", "bug", "in", "Android", "Keystore", "updateAAD", "."], "add_tokens": "engineUpdateAAD ( input , inputOffset , inputLen ) ;", "del_tokens": "super . engineUpdateAAD ( input , inputOffset , inputLen ) ;"}
+{"commit_tokens": ["Finish", "any", "enter", "animation", "when", "jumping", "to", "state", "."], "add_tokens": "mCurrDrawable . setAlpha ( mAlpha ) ;", "del_tokens": ""}
+{"commit_tokens": ["Revert", "r", ".", "831830", "."], "add_tokens": "", "del_tokens": "loader . loadClass ( basePackage + \" loader . ResourceEntry \" ) ;"}
+{"commit_tokens": ["Check", "AirplaneMode", "when", "enabling", "Bluetooth", "has", "finished", "."], "add_tokens": "if ( mIsAirplaneSensitive & & isAirplaneModeOn ( ) ) { disable ( false ) ; }", "del_tokens": ""}
+{"commit_tokens": ["remove", "unusage", "service", "type", "."], "add_tokens": "", "del_tokens": "context . addServiceType ( UserConstants . USER_INCLUDE ) ;"}
+{"commit_tokens": ["Make", "ControlFlowGraph", "public"], "add_tokens": "public class ControlFlowGraph < N > extends", "del_tokens": "class ControlFlowGraph < N > extends"}
+{"commit_tokens": ["Hiding", "soft", "keyboard", "on", "site", "selection"], "add_tokens": "hideSoftKeyboard ( ) ;", "del_tokens": ""}
+{"commit_tokens": ["Added", "assertion", "message"], "add_tokens": "assert ! myDisposed : \" Already disposed \" ;", "del_tokens": "assert ! myDisposed ;"}
+{"commit_tokens": ["Suppressing", "deprecation", "warning", "in", "a", "test"], "add_tokens": "@ SuppressWarnings ( \" deprecation \" )", "del_tokens": ""}
+{"commit_tokens": ["reduce", "visibility"], "add_tokens": "private void setConverter ( ) throws IOException {", "del_tokens": "protected void setConverter ( ) throws IOException {"}
+{"commit_tokens": ["Fix", "checkstyle"], "add_tokens": "", "del_tokens": ""}
+{"commit_tokens": ["fixed", "issue", "with", "implementation", "of", "getFiles", "in", "UsageTarget"], "add_tokens": "return null ;", "del_tokens": "throw new UnsupportedOperationException ( ) ;"}
+{"commit_tokens": ["Allow", "class", "balance", "options", "without", "expert_mode", "."], "add_tokens": "", "del_tokens": "\" balance_classes \" , \" max_after_balance_size \" , \" max_after_balance_size \" ,"}
+{"commit_tokens": ["removed", "the", "get", "name", "method", "as", "operation", "set", "class", "names", "are", "going", "to", "be", "used", "for", "referencing", "them", "and", "not", "custom", "names", "."], "add_tokens": "", "del_tokens": "public String getOperationSetName ( ) ;"}
