@@ -6,6 +6,7 @@
 <a href="https://pepy.tech/project/commit"><img alt="Downloads" src="https://static.pepy.tech/badge/commit"></a>
 </p>
 
+This is implementation of [CommitBERT: Commit Message Generation Using Pre-Trained Programming Language Model](https://arxiv.org/abs/2105.14242). CommitBERT is accepted in ACL workshop : NLP4Prog.
 Have you ever hesitated to write a commit message? Now get a commit message from Artificial Intelligence!
 
 <div align="center">
@@ -138,3 +139,13 @@ Versions are managed only within the branch with the name of each version. After
 
 ### Author
 [Tae Hwan Jung(@graykode)](https://github.com/graykode)
+
+### Citation
+```
+@article{jung2021commitbert,
+  title={CommitBERT: Commit Message Generation Using Pre-Trained Programming Language Model},
+  author={Jung, Tae-Hwan},
+  journal={arXiv preprint arXiv:2105.14242},
+  year={2021}
+}
+```
